@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // site: 'https://teu-usuari.github.io',
-  // base: '/plens-front',
+    site: 'https://catbru.github.io',
+    base: '/plens-front',
 });
