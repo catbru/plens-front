@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { interventions, regidors, tags } from "../../lib/data";
+
+const totalInterventions = interventions.length;
+const totalRegidors = regidors.length;
+const totalTags = tags.length;
+const parties = [
+  ...new Set(interventions.map((i) => i.speaker_party).filter(Boolean)),
+];
+---
+
+<BaseLayout title="Cercador d'intervencions">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li>Cercador</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">🔍 Cercador</h1>
+    <p class="page-header__subtitle">
+      Cerca dins de les {totalInterventions.toLocaleString("ca-ES")} intervencions
+      dels plens municipals de Barcelona
+    </p>
+  </div>
+
+  <!-- Explicació -->
+  <div class="search-explainer">
+    <div class="search-explainer__grid">
+      <div class="search-explainer__item">
+        <span class="search-explainer__icon">💬</span>
+        <div>
+          <strong>Cerca textual</strong>
+          <p>
+            Escriu qualsevol paraula per trobar-la dins de les intervencions.
+            Ex: <em>«habitatge»</em>, <em>«pressupostos»</em>, <em>«metro»</em>
+          </p>
+        </div>
+      </div>
+      <div class="search-explainer__item">
+        <span class="search-explainer__icon">👤</span>
+        <div>
+          <strong>Filtra per Regidor</strong>
+          <p>
+            Utilitza el filtre «Regidor» per veure només les intervencions d'una
+            persona concreta.
+          </p>
+        </div>
+      </div>
+      <div class="search-explainer__item">
+        <span class="search-explainer__icon">🏛️</span>
+        <div>
+          <strong>Filtra per Partit</strong>
+          <p>
+            Selecciona un partit polític per veure què diuen els seus
+            representants sobre un tema.
+          </p>
+        </div>
+      </div>
+      <div class="search-explainer__item">
+        <span class="search-explainer__icon">🏷️</span>
+        <div>
+          <strong>Filtra per Tema</strong>
+          <p>
+            Filtra per àrea temàtica: Habitatge, Seguretat, Educació, Mobilitat
+            i {totalTags - 4} més.
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="search-explainer__tip">
+      💡 <strong>Consell:</strong> Combina cerca + filtres per resultats precisos.
+      Per exemple, cerca <em>«lloguer»</em> i filtra per <em>Partit: ERC</em> per
+      veure què diu ERC sobre els lloguers. En fer clic a un resultat, aniràs directament
+      a la intervenció dins la sessió plenària per veure-la en context.
+    </p>
+  </div>
+
+  <div id="search"></div>
+
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.PagefindUI) {
+        new window.PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          showEmptyFilters: true,
+          resetStyles: false,
+          translations: {
+            placeholder:
+              "Què busques? Ex: habitatge, pressupostos, Collboni...",
+            zero_results:
+              "Cap resultat per «[SEARCH_TERM]». Prova amb altres paraules o treu els filtres.",
+            many_results: "[COUNT] resultats per «[SEARCH_TERM]»",
+            one_result: "1 resultat per «[SEARCH_TERM]»",
+            filters: "Filtres",
+            all_items: "Tots",
+            load_more: "Més resultats",
+          },
+        });
+      }
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  :root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #e4002b;
+    --pagefind-ui-text: #1a1a1a;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: #e5e7eb;
+    --pagefind-ui-tag: #f5f5f5;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-font: "Inter", sans-serif;
+  }
+
+  .search-explainer {
+    background: var(--c-bg-alt);
+    border-radius: var(--radius);
+    padding: var(--s-xl);
+    margin-bottom: var(--s-xl);
+    border: 1px solid var(--c-border);
+  }
+  .search-explainer__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-lg);
+    margin-bottom: var(--s-lg);
+  }
+  .search-explainer__item {
+    display: flex;
+    gap: var(--s-md);
+    align-items: flex-start;
+  }
+  .search-explainer__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .search-explainer__item strong {
+    display: block;
+    margin-bottom: var(--s-xs);
+    font-size: var(--fs-sm);
+  }
+  .search-explainer__item p {
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .search-explainer__tip {
+    font-size: var(--fs-sm);
+    background: #fef9c3;
+    padding: var(--s-md);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid #eab308;
+    line-height: 1.5;
+  }
+  .search-explainer__tip em {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .search-explainer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

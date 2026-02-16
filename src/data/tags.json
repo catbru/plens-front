@@ -1,0 +1,117 @@
+[
+    {
+        "code": 1,
+        "name": "Macroeconomia",
+        "description": "Inflació, atur, impostos, pressupostos."
+    },
+    {
+        "code": 2,
+        "name": "Drets civils i llibertats",
+        "description": "Minories, gènere, drets LGTBI, religió."
+    },
+    {
+        "code": 3,
+        "name": "Salut",
+        "description": "Sistema sanitari, medicaments, salut pública."
+    },
+    {
+        "code": 4,
+        "name": "Agricultura",
+        "description": "Ramaderia, pesca, política agrària."
+    },
+    {
+        "code": 5,
+        "name": "Treball",
+        "description": "Condicions laborals, sindicats, ocupació."
+    },
+    {
+        "code": 6,
+        "name": "Educació",
+        "description": "Escoles, universitats, sistema educatiu."
+    },
+    {
+        "code": 7,
+        "name": "Medi Ambient",
+        "description": "Canvi climàtic, contaminació, conservació."
+    },
+    {
+        "code": 8,
+        "name": "Energia",
+        "description": "Electricitat, renovables, gas, petroli."
+    },
+    {
+        "code": 9,
+        "name": "Immigració",
+        "description": "Control de fronteres, integració, asil (Nativisme)."
+    },
+    {
+        "code": 10,
+        "name": "Transport",
+        "description": "Carreteres, trens (AVE/Rodalies), aeroports."
+    },
+    {
+        "code": 11,
+        "name": "Assumptes Socials",
+        "description": "Benestar social, pobresa, gent gran, família."
+    },
+    {
+        "code": 12,
+        "name": "Habitatge",
+        "description": "Preu del lloguer, urbanisme, hipoteques."
+    },
+    {
+        "code": 13,
+        "name": "Banca i Comerç",
+        "description": "Mercats financers, comerç interior i exterior."
+    },
+    {
+        "code": 14,
+        "name": "Defensa",
+        "description": "Exèrcit, seguretat nacional, aliances militars."
+    },
+    {
+        "code": 15,
+        "name": "Ciència i Tecnologia",
+        "description": "Recerca (R+D), comunicacions, espai."
+    },
+    {
+        "code": 16,
+        "name": "Comerç Exterior",
+        "description": "(Sovint integrat a la 13, però mantingut com a eix de globalització)."
+    },
+    {
+        "code": 17,
+        "name": "Justícia i Ordre Públic",
+        "description": "Tribunals, policia, codi penal, terrorisme."
+    },
+    {
+        "code": 18,
+        "name": "Cultura i Oci",
+        "description": "Esports, mitjans de comunicació, patrimoni."
+    },
+    {
+        "code": 19,
+        "name": "Administració Pública",
+        "description": "Funcionament del govern, burocràcia, eleccions."
+    },
+    {
+        "code": 20,
+        "name": "Afers Exteriors",
+        "description": "Relacions internacionals, ajut al desenvolupament."
+    },
+    {
+        "code": 21,
+        "name": "Terres Públiques",
+        "description": "Recursos naturals, gestió de territoris de l'Estat."
+    },
+    {
+        "code": 22,
+        "name": "Afers de la UE",
+        "description": "Polítiques i regulacions provinents de Brussel·les."
+    },
+    {
+        "code": 23,
+        "name": "Clivatge Nacional",
+        "description": "Autodeterminació, independència, llengua (com a element d'identitat nacional) i relació Catalunya-Espanya."
+    }
+]

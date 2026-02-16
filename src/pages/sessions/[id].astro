@@ -1,0 +1,328 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/rhetoric.css";
+import {
+  sessions,
+  getInterventionsBySession,
+  generateSessionId,
+  getYouTubeId,
+  groupByAgendaItem,
+  partyClass,
+  polEmoji,
+  polClass,
+  polLabel,
+  slugify,
+  findRegidor,
+  youtubeTimestamp,
+  getAnnotatedSession,
+  getAgendaAnnotation,
+  renderAnnotatedText,
+  RHETORIC_TAGS,
+} from "../../lib/data";
+
+export function getStaticPaths() {
+  return sessions.map((s) => {
+    const id = generateSessionId(s.date, s.video_url);
+    return { params: { id }, props: { session: s } };
+  });
+}
+
+const { id } = Astro.params;
+const { session } = Astro.props;
+const sessionInterventions = getInterventionsBySession(id!);
+const agendaGroups = groupByAgendaItem(sessionInterventions);
+const ytId = getYouTubeId(session.video_url);
+const annotatedSession = getAnnotatedSession(id!);
+
+// Check if this session has annotations
+const hasAnnotations = sessionInterventions.some(
+  (i) => i.annotated_text && i.annotated_text !== i.text,
+);
+---
+
+<BaseLayout title={session.title}>
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li><a href="/sessions/">Sessions</a></li>
+    <li>{session.date}</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">{session.title}</h1>
+    <p class="page-header__subtitle">
+      📅 {session.date} · {sessionInterventions.length} intervencions
+      {
+        hasAnnotations && (
+          <span class="badge badge--tag">🎭 Anàlisi retòrica</span>
+        )
+      }
+    </p>
+  </div>
+
+  <!-- Vídeo -->
+  {
+    ytId && (
+      <div class="video-embed">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${ytId}`}
+          title={session.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+    )
+  }
+
+  <!-- Documents -->
+  {
+    session.documents.length > 0 && (
+      <section class="section">
+        <h2 class="section__title">📄 Documents oficials</h2>
+        <ul class="doc-list">
+          {session.documents.map((doc) => (
+            <li>
+              <a href={doc.url} target="_blank" rel="noopener">
+                {doc.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- Rhetoric legend (toggleable) -->
+  {
+    hasAnnotations && (
+      <div class="rhetoric-panel" id="rhetoric-panel">
+        <button
+          class="rhetoric-panel__toggle"
+          id="toggle-annotations"
+          title="Activar/desactivar anotacions"
+        >
+          🎭 Anotacions retòriques
+          <span class="rhetoric-panel__toggle-indicator" id="toggle-indicator">
+            ✓
+          </span>
+        </button>
+        <div class="rhetoric-panel__legend" id="rhetoric-legend">
+          {Object.entries(RHETORIC_TAGS).map(([tag, meta]) => (
+            <span
+              class="rh-legend-item"
+              style={`border-left: 3px solid ${meta.color}; padding-left: 0.5rem`}
+            >
+              {meta.emoji} {meta.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  <!-- Punts de l'ordre del dia -->
+  <section class="section">
+    <h2 class="section__title">📋 Ordre del dia</h2>
+    {
+      (() => {
+        let intIdx = 0;
+        return [...agendaGroups.entries()].map(([title, items]) => {
+          const first = items[0];
+          const pol = first?.polarization;
+          const hate = items.some((i) => i.hate_speech);
+          const itemTags = first?.tags || [];
+          const number = first?.agenda_item_number;
+
+          // Get agenda summary and party positions
+          const agendaAnnotation = annotatedSession
+            ? getAgendaAnnotation(id!, title)
+            : undefined;
+
+          return (
+            <div class="agenda-item" data-pagefind-body>
+              <div class="agenda-item__header">
+                <div>
+                  {number && <span class="agenda-item__number">{number}</span>}
+                  <span class="agenda-item__title">{title}</span>
+                </div>
+                <div class="agenda-item__meta">
+                  {pol && (
+                    <span class={`badge ${polClass(pol)}`}>
+                      {polEmoji(pol)} {polLabel(pol)}
+                    </span>
+                  )}
+                  {hate && (
+                    <span class="badge badge--hate">⚠️ Discurs d'odi</span>
+                  )}
+                </div>
+              </div>
+
+              {itemTags.length > 0 && (
+                <div class="agenda-item__meta">
+                  {itemTags.map((t) => (
+                    <a href={`/temes/${t.code}/`} class="badge badge--tag">
+                      {t.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Agenda summary */}
+              {agendaAnnotation?.agenda_summary && (
+                <div class="agenda-summary">
+                  <div class="agenda-summary__title">📝 Resum del punt</div>
+                  <div class="agenda-summary__text">
+                    {agendaAnnotation.agenda_summary}
+                  </div>
+                </div>
+              )}
+
+              {/* Party positions */}
+              {agendaAnnotation?.party_positions &&
+                Object.keys(agendaAnnotation.party_positions).length > 0 && (
+                  <details class="agenda-details">
+                    <summary>
+                      👥 Posicions dels partits (
+                      {Object.keys(agendaAnnotation.party_positions).length})
+                    </summary>
+                    <div class="party-positions">
+                      {Object.entries(agendaAnnotation.party_positions).map(
+                        ([party, position]) => (
+                          <div class="party-position">
+                            <div class="party-position__name">
+                              <span class={`badge ${partyClass(party)}`}>
+                                {party}
+                              </span>
+                            </div>
+                            <div class="party-position__text">{position}</div>
+                          </div>
+                        ),
+                      )}
+                    </div>
+                  </details>
+                )}
+
+              <div class="agenda-item__interventions">
+                {items.map((i) => {
+                  const regidor = findRegidor(i.speaker_name);
+                  const currentIdx = intIdx++;
+                  const anchorUrl = `/sessions/${id}/#int-${currentIdx}`;
+                  const tagNames = (i.tags || []).map((t) => t.name);
+                  const hasAnnotatedText =
+                    i.annotated_text && i.annotated_text !== i.text;
+                  const renderedText = hasAnnotatedText
+                    ? renderAnnotatedText(i.annotated_text!)
+                    : null;
+
+                  return (
+                    <div
+                      class="intervention"
+                      id={`int-${currentIdx}`}
+                      data-pagefind-body
+                      data-pagefind-meta={`url:${anchorUrl}`}
+                    >
+                      {i.speaker_name && (
+                        <span data-pagefind-filter="Regidor" class="sr-only">
+                          {i.speaker_name}
+                        </span>
+                      )}
+                      {i.speaker_party && (
+                        <span data-pagefind-filter="Partit" class="sr-only">
+                          {i.speaker_party}
+                        </span>
+                      )}
+                      {tagNames.map((tn) => (
+                        <span data-pagefind-filter="Tema" class="sr-only">
+                          {tn}
+                        </span>
+                      ))}
+                      {regidor?.photo && (
+                        <img
+                          src={regidor.photo}
+                          alt={i.speaker_name}
+                          class="intervention__avatar"
+                          loading="lazy"
+                        />
+                      )}
+                      <div>
+                        <div class="intervention__header">
+                          <a
+                            href={`/regidors/${slugify(i.speaker_name)}/`}
+                            class="intervention__name"
+                          >
+                            {i.speaker_name}
+                          </a>
+                          <span class={`badge ${partyClass(i.speaker_party)}`}>
+                            {i.speaker_party}
+                          </span>
+                          {i.speaker_role && (
+                            <span class="badge badge--tag">
+                              {i.speaker_role}
+                            </span>
+                          )}
+                          <a
+                            href={youtubeTimestamp(
+                              session.video_url,
+                              i.start_seconds,
+                            )}
+                            target="_blank"
+                            rel="noopener"
+                            class="intervention__time"
+                          >
+                            🕐 {i.start_time}
+                          </a>
+                        </div>
+                        {renderedText ? (
+                          <p
+                            class="intervention__text"
+                            set:html={renderedText}
+                          />
+                        ) : (
+                          <p class="intervention__text">{i.text}</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        });
+      })()
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .intervention:target {
+    background: var(--c-accent-light);
+    border-radius: var(--radius);
+    animation: highlight-fade 3s ease forwards;
+  }
+  @keyframes highlight-fade {
+    0% {
+      background: var(--c-accent-light);
+    }
+    100% {
+      background: transparent;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("toggle-annotations");
+    const indicator = document.getElementById("toggle-indicator");
+    const legend = document.getElementById("rhetoric-legend");
+    const mainContent = document.querySelector(".main-content");
+    if (!btn || !mainContent) return;
+
+    let active = true;
+    btn.addEventListener("click", () => {
+      active = !active;
+      mainContent.classList.toggle("annotations-hidden", !active);
+      if (indicator) indicator.textContent = active ? "✓" : "✗";
+      btn.classList.toggle("rhetoric-panel__toggle--off", !active);
+      if (legend) legend.style.display = active ? "flex" : "none";
+    });
+  });
+</script>

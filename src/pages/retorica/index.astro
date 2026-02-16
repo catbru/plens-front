@@ -1,0 +1,734 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/rhetoric.css";
+import {
+    extractRhetoricFragments,
+    RHETORIC_TAGS,
+    tags as allTopics,
+    partyClass,
+    type RhetoricTagName,
+} from "../../lib/data";
+
+const fragments = extractRhetoricFragments();
+
+// Unique parties sorted by frequency
+const partyCounts = new Map<string, number>();
+for (const f of fragments) {
+    const p = f.speaker_party || "Altres";
+    partyCounts.set(p, (partyCounts.get(p) || 0) + 1);
+}
+const parties = [...partyCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([p]) => p);
+
+// Unique topics present in fragments, sorted by frequency
+const topicCounts = new Map<string, number>();
+for (const f of fragments) {
+    for (const t of f.topics) {
+        topicCounts.set(t.name, (topicCounts.get(t.name) || 0) + 1);
+    }
+}
+const topicList = [...topicCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, count]) => ({ name, count }));
+
+const tagNames = Object.keys(RHETORIC_TAGS) as RhetoricTagName[];
+const totalFragments = fragments.length;
+const tagCounts = Object.fromEntries(
+    tagNames.map((t) => [t, fragments.filter((f) => f.tag === t).length]),
+);
+
+// Serialize fragments for client-side filtering (compact)
+const clientFragments = fragments.map((f) => ({
+    tg: f.tag,
+    p: f.speaker_party || "Altres",
+    tx: f.text,
+    sn: f.speaker_name,
+    sd: f.session_date,
+    a: f.intervention_anchor,
+    c: f.color,
+    tp: f.topics.map((t) => t.name),
+}));
+---
+
+<BaseLayout title="Anàlisi Retòrica">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <li><a href="/">Inici</a></li>
+        <li>Retòrica</li>
+    </nav>
+
+    <div class="page-header">
+        <h1 class="page-header__title">🎭 Anàlisi Retòrica</h1>
+        <p class="page-header__subtitle">
+            {totalFragments} fragments retòrics detectats en les intervencions plenàries
+        </p>
+        <p class="rhet-disclaimer">
+            ⚠️ Classificació experimental generada automàticament per un model
+            d'intel·ligència artificial. Els resultats poden contenir errors o
+            imprecisions.
+        </p>
+    </div>
+
+    <!-- Category stat cards -->
+    <div class="rhet-stats">
+        {
+            (
+                Object.entries(RHETORIC_TAGS) as [
+                    RhetoricTagName,
+                    (typeof RHETORIC_TAGS)[RhetoricTagName],
+                ][]
+            ).map(([tag, meta]) => (
+                <button
+                    class="rhet-stat-card"
+                    data-filter-tag={tag}
+                    style={`border-left: 4px solid ${meta.color}`}
+                >
+                    <span class="rhet-stat-card__emoji">{meta.emoji}</span>
+                    <span class="rhet-stat-card__label">{meta.label}</span>
+                    <span class="rhet-stat-card__count">{tagCounts[tag]}</span>
+                </button>
+            ))
+        }
+    </div>
+
+    <!-- 3-axis filter bar -->
+    <div class="rhet-filters" id="rhet-filters">
+        <div class="rhet-filter-group">
+            <label class="rhet-filter-label">🏛️ Partit</label>
+            <select class="rhet-filter-select" id="filter-party">
+                <option value="">Tots els partits</option>
+                {
+                    parties.map((p) => (
+                        <option value={p}>
+                            {p} ({partyCounts.get(p)})
+                        </option>
+                    ))
+                }
+            </select>
+        </div>
+        <div class="rhet-filter-group">
+            <label class="rhet-filter-label">🏷️ Tema</label>
+            <select class="rhet-filter-select" id="filter-topic">
+                <option value="">Tots els temes</option>
+                {
+                    topicList.map((t) => (
+                        <option value={t.name}>
+                            {t.name} ({t.count})
+                        </option>
+                    ))
+                }
+            </select>
+        </div>
+        <button
+            class="rhet-filter-reset"
+            id="filter-reset"
+            title="Netejar filtres"
+        >
+            ✕ Netejar
+        </button>
+    </div>
+
+    <!-- Active filters summary + count -->
+    <div class="rhet-results-bar" id="rhet-results-bar">
+        <span class="rhet-results-count" id="rhet-results-count">
+            Selecciona una categoria, partit o tema per veure els fragments
+        </span>
+    </div>
+
+    <!-- Matrix table -->
+    <section class="rhet-matrix-section" id="rhet-matrix-section">
+        <h2 class="section__title">📊 Distribució per partit i categoria</h2>
+        <div class="rhet-matrix-wrap">
+            <table class="rhet-matrix" id="rhet-matrix">
+                <thead>
+                    <tr>
+                        <th></th>
+                        {
+                            tagNames.map((tag) => (
+                                <th
+                                    style={`color: ${RHETORIC_TAGS[tag].color}`}
+                                >
+                                    {RHETORIC_TAGS[tag].emoji}{" "}
+                                    {RHETORIC_TAGS[tag].label}
+                                </th>
+                            ))
+                        }
+                        <th class="rhet-matrix__total">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="rhet-matrix-body">
+                    {
+                        parties.map((party) => (
+                            <tr data-party={party}>
+                                <td>
+                                    <span class={`badge ${partyClass(party)}`}>
+                                        {party}
+                                    </span>
+                                </td>
+                                {tagNames.map((tag) => {
+                                    const count = fragments.filter(
+                                        (f) =>
+                                            f.tag === tag &&
+                                            (f.speaker_party || "Altres") ===
+                                                party,
+                                    ).length;
+                                    return (
+                                        <td data-tag={tag} data-party={party}>
+                                            {count > 0 ? (
+                                                <button
+                                                    class="rhet-matrix__cell"
+                                                    data-tag={tag}
+                                                    data-party={party}
+                                                    title={`Veure ${count} fragments de ${RHETORIC_TAGS[tag].label} de ${party}`}
+                                                >
+                                                    {count}
+                                                </button>
+                                            ) : (
+                                                <span class="rhet-matrix__zero">
+                                                    —
+                                                </span>
+                                            )}
+                                        </td>
+                                    );
+                                })}
+                                <td
+                                    class="rhet-matrix__total"
+                                    data-party-total={party}
+                                >
+                                    {partyCounts.get(party) || 0}
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Fragment results -->
+    <section
+        class="rhet-results-section"
+        id="rhet-results-section"
+        style="display:none"
+    >
+        <div class="rhet-fragments" id="rhet-fragments-container"></div>
+    </section>
+
+    <!-- Data for client-side -->
+    <script
+        id="rhetoric-data"
+        type="application/json"
+        set:html={JSON.stringify(clientFragments)}
+    />
+</BaseLayout>
+
+<style>
+    /* Stats cards */
+    .rhet-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .rhet-stat-card {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition:
+            transform 0.15s,
+            box-shadow 0.15s;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .rhet-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .rhet-stat-card--active {
+        box-shadow: var(--shadow-md);
+        outline: 2px solid var(--c-text);
+        outline-offset: 1px;
+    }
+
+    .rhet-stat-card__emoji {
+        font-size: 1.5rem;
+    }
+    .rhet-stat-card__label {
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    .rhet-stat-card__count {
+        margin-left: auto;
+        font-weight: 700;
+        font-size: 1.4rem;
+        opacity: 0.7;
+    }
+
+    /* Filter bar */
+    .rhet-filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius);
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .rhet-filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .rhet-filter-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        opacity: 0.7;
+    }
+
+    .rhet-filter-select {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-sm);
+        background: var(--c-bg);
+        color: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+
+    .rhet-filter-select:focus {
+        outline: 2px solid var(--c-accent);
+        outline-offset: 1px;
+    }
+
+    .rhet-filter-reset {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-sm);
+        background: none;
+        color: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s;
+    }
+
+    .rhet-filter-reset:hover {
+        background: var(--c-bg-subtle);
+    }
+
+    /* Results bar */
+    .rhet-results-bar {
+        padding: 0.6rem 1rem;
+        background: var(--c-bg-alt);
+        border-radius: var(--radius-sm);
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .rhet-results-count {
+        font-weight: 500;
+        color: var(--c-text-muted);
+    }
+
+    /* Matrix table */
+    .rhet-matrix-section {
+        margin: 0 0 2rem;
+    }
+    .rhet-matrix-wrap {
+        overflow-x: auto;
+    }
+
+    .rhet-matrix {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    .rhet-matrix th,
+    .rhet-matrix td {
+        padding: 0.6rem 0.75rem;
+        text-align: center;
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .rhet-matrix th {
+        font-weight: 600;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .rhet-matrix td:first-child {
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .rhet-matrix__cell {
+        background: none;
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-sm);
+        padding: 0.3rem 0.75rem;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.15s;
+        color: inherit;
+        min-width: 40px;
+    }
+
+    .rhet-matrix__cell:hover {
+        background: var(--c-accent-light);
+        border-color: var(--c-accent);
+        transform: scale(1.1);
+    }
+
+    .rhet-matrix__cell--active {
+        background: var(--c-text);
+        color: var(--c-bg);
+        border-color: var(--c-text);
+    }
+
+    .rhet-matrix__zero {
+        opacity: 0.25;
+    }
+    .rhet-matrix__total {
+        font-weight: 700;
+        opacity: 0.6;
+    }
+
+    /* Results */
+    .rhet-results-section {
+        margin: 0 0 2rem;
+        animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .rhet-fragments {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    :global(.rhet-fragment) {
+        display: block;
+        padding: 0.85rem 1rem;
+        background: var(--c-surface);
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: inherit;
+        transition:
+            transform 0.1s,
+            box-shadow 0.1s;
+    }
+
+    :global(.rhet-fragment:hover) {
+        transform: translateX(4px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    :global(.rhet-fragment__text) {
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-style: italic;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    :global(.rhet-fragment__meta) {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        font-size: 0.8rem;
+        opacity: 0.7;
+    }
+
+    :global(.rhet-fragment__speaker) {
+        font-weight: 600;
+    }
+
+    :global(.rhet-fragment__topics) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin-top: 0.35rem;
+    }
+
+    :global(.rhet-fragment__topic) {
+        font-size: 0.7rem;
+        background: var(--c-bg-alt);
+        padding: 0.1rem 0.4rem;
+        border-radius: 3px;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+        .rhet-filters {
+            flex-direction: column;
+        }
+        .rhet-filter-group {
+            min-width: 100%;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const dataEl = document.getElementById("rhetoric-data");
+        if (!dataEl) return;
+        const allFragments: any[] = JSON.parse(dataEl.textContent || "[]");
+
+        const container = document.getElementById("rhet-fragments-container")!;
+        const section = document.getElementById("rhet-results-section")!;
+        const countEl = document.getElementById("rhet-results-count")!;
+        const partySelect = document.getElementById(
+            "filter-party",
+        ) as HTMLSelectElement;
+        const topicSelect = document.getElementById(
+            "filter-topic",
+        ) as HTMLSelectElement;
+        const resetBtn = document.getElementById("filter-reset")!;
+
+        const tagLabels: Record<string, string> = {
+            "fr-proposta": "🟢 Proposta",
+            "fr-ideologia": "🟣 Ideologia",
+            "fr-dada": "🔵 Dada",
+            "fr-atac": "🔴 Atac",
+        };
+
+        let activeTag: string | null = null;
+
+        function getFiltered() {
+            let filtered = allFragments;
+            if (activeTag)
+                filtered = filtered.filter((f: any) => f.tg === activeTag);
+            if (partySelect.value)
+                filtered = filtered.filter(
+                    (f: any) => f.p === partySelect.value,
+                );
+            if (topicSelect.value)
+                filtered = filtered.filter((f: any) =>
+                    f.tp.includes(topicSelect.value),
+                );
+            return filtered;
+        }
+
+        function updateView() {
+            const filtered = getFiltered();
+            const hasFilters =
+                activeTag || partySelect.value || topicSelect.value;
+
+            // Update active filter summary
+            if (hasFilters) {
+                const parts: string[] = [];
+                if (activeTag) parts.push(tagLabels[activeTag] || activeTag);
+                if (partySelect.value) parts.push(partySelect.value);
+                if (topicSelect.value) parts.push(`🏷️ ${topicSelect.value}`);
+                countEl.textContent = `${parts.join(" · ")} — ${filtered.length} fragments`;
+                countEl.style.color = "";
+            } else {
+                countEl.textContent =
+                    "Selecciona una categoria, partit o tema per veure els fragments";
+                countEl.style.color = "";
+            }
+
+            // Update matrix counts dynamically
+            updateMatrix();
+
+            // Show/hide fragments
+            if (hasFilters) {
+                renderFragments(filtered);
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+
+        function updateMatrix() {
+            // Update matrix cell counts based on current topic filter
+            const topicFilter = topicSelect.value;
+            const matrixCells =
+                document.querySelectorAll<HTMLButtonElement>(
+                    ".rhet-matrix__cell",
+                );
+
+            matrixCells.forEach((cell) => {
+                const tag = cell.dataset.tag!;
+                const party = cell.dataset.party!;
+                let count = allFragments.filter((f: any) => {
+                    if (f.tg !== tag || f.p !== party) return false;
+                    if (topicFilter && !f.tp.includes(topicFilter))
+                        return false;
+                    return true;
+                }).length;
+                cell.textContent = String(count);
+                cell.style.display = count > 0 ? "" : "none";
+                // Show zero placeholder if count is 0
+                const td = cell.parentElement!;
+                let zero = td.querySelector(
+                    ".rhet-matrix__zero",
+                ) as HTMLElement;
+                if (count === 0) {
+                    if (!zero) {
+                        zero = document.createElement("span");
+                        zero.className = "rhet-matrix__zero";
+                        zero.textContent = "—";
+                        td.appendChild(zero);
+                    }
+                    zero.style.display = "";
+                } else if (zero) {
+                    zero.style.display = "none";
+                }
+            });
+
+            // Update party totals
+            document
+                .querySelectorAll<HTMLElement>("[data-party-total]")
+                .forEach((el) => {
+                    const party = el.dataset.partyTotal!;
+                    const count = allFragments.filter((f: any) => {
+                        if (f.p !== party) return false;
+                        if (topicFilter && !f.tp.includes(topicFilter))
+                            return false;
+                        return true;
+                    }).length;
+                    el.textContent = String(count);
+                });
+        }
+
+        function renderFragments(filtered: any[]) {
+            container.innerHTML = filtered
+                .map(
+                    (f: any) => `
+        <a href="${f.a}" class="rhet-fragment" style="border-left: 3px solid ${f.c}">
+          <blockquote class="rhet-fragment__text">«${escapeHtml(f.tx)}»</blockquote>
+          <div class="rhet-fragment__meta">
+            <span class="rhet-fragment__speaker">${escapeHtml(f.sn)}</span>
+            <span>📅 ${f.sd}</span>
+          </div>
+          ${
+              f.tp.length > 0
+                  ? `<div class="rhet-fragment__topics">${f.tp.map((t: string) => `<span class="rhet-fragment__topic">🏷️ ${escapeHtml(t)}</span>`).join("")}</div>`
+                  : ""
+          }
+        </a>`,
+                )
+                .join("");
+        }
+
+        function escapeHtml(s: string): string {
+            return s
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function clearAll() {
+            activeTag = null;
+            partySelect.value = "";
+            topicSelect.value = "";
+            document
+                .querySelectorAll(".rhet-stat-card--active")
+                .forEach((el) => el.classList.remove("rhet-stat-card--active"));
+            document
+                .querySelectorAll(".rhet-matrix__cell--active")
+                .forEach((el) =>
+                    el.classList.remove("rhet-matrix__cell--active"),
+                );
+            updateView();
+        }
+
+        // Category stat card clicks
+        document
+            .querySelectorAll<HTMLButtonElement>(".rhet-stat-card")
+            .forEach((card) => {
+                card.addEventListener("click", () => {
+                    const tag = card.dataset.filterTag!;
+                    // Toggle
+                    if (activeTag === tag) {
+                        activeTag = null;
+                        card.classList.remove("rhet-stat-card--active");
+                    } else {
+                        activeTag = tag;
+                        document
+                            .querySelectorAll(".rhet-stat-card--active")
+                            .forEach((el) =>
+                                el.classList.remove("rhet-stat-card--active"),
+                            );
+                        card.classList.add("rhet-stat-card--active");
+                    }
+                    document
+                        .querySelectorAll(".rhet-matrix__cell--active")
+                        .forEach((el) =>
+                            el.classList.remove("rhet-matrix__cell--active"),
+                        );
+                    updateView();
+                });
+            });
+
+        // Matrix cell clicks
+        document
+            .querySelectorAll<HTMLButtonElement>(".rhet-matrix__cell")
+            .forEach((cell) => {
+                cell.addEventListener("click", () => {
+                    const tag = cell.dataset.tag!;
+                    const party = cell.dataset.party!;
+                    // Set both filters
+                    activeTag = tag;
+                    partySelect.value = party;
+                    document
+                        .querySelectorAll(".rhet-stat-card--active")
+                        .forEach((el) =>
+                            el.classList.remove("rhet-stat-card--active"),
+                        );
+                    document
+                        .querySelectorAll(".rhet-matrix__cell--active")
+                        .forEach((el) =>
+                            el.classList.remove("rhet-matrix__cell--active"),
+                        );
+                    const statCard = document.querySelector(
+                        `[data-filter-tag="${tag}"]`,
+                    );
+                    statCard?.classList.add("rhet-stat-card--active");
+                    cell.classList.add("rhet-matrix__cell--active");
+                    updateView();
+                    section.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                });
+            });
+
+        // Dropdown changes
+        partySelect.addEventListener("change", updateView);
+        topicSelect.addEventListener("change", updateView);
+
+        // Reset
+        resetBtn.addEventListener("click", clearAll);
+    });
+</script>

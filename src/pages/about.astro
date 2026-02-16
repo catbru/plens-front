@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Sobre el projecte">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li>Sobre el projecte</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">Sobre plens.barcelona</h1>
+  </div>
+
+  <div class="about-content">
+    <section class="section">
+      <h2>El projecte</h2>
+      <p>
+        <strong>plens.barcelona</strong> és una plataforma cívica que transforma les
+        sessions plenàries del Consell Municipal de Barcelona en dades obertes, estructurades
+        i reutilitzables. El projecte neix de la convicció que la informació pública
+        ha de ser accessible, contrastable i comprensible per a tothom, no només per
+        a qui pot seguir en directe un ple de cinc hores.
+      </p>
+      <p>
+        L'objectiu és contribuir a una democràcia local més transparent i una
+        ciutadania més informada, oferint eines que permetin explorar què es
+        debat, qui ho diu i com es posicionen els grups municipals sobre els
+        temes que afecten la ciutat.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Per què dades obertes dels plens?</h2>
+      <p>
+        Les sessions plenàries són el cor de la democràcia municipal: és on es
+        prenen les decisions que afecten directament la vida quotidiana de la
+        ciutadania. Tanmateix, la informació que en resulta —vídeos de llarga
+        durada, actes en PDF, ordres del dia tècniques— sovint és difícil de
+        consumir i gairebé impossible de creuar o analitzar.
+      </p>
+      <p>
+        <strong>plens.barcelona</strong> resol aquest buit convertint informació pública
+        dispersa en un conjunt de dades obert i navegable: intervencions indexades
+        per orador, partit i temàtica; resums automàtics de cada punt de l'ordre del
+        dia; mètriques de polarització; i un cercador de text complet sobre tot el
+        que s'ha dit al ple.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Com funciona</h2>
+      <p>
+        El procés combina fonts públiques amb eines d'intel·ligència artificial
+        de codi obert:
+      </p>
+      <ol>
+        <li>
+          <strong>Fonts públiques</strong> — els vídeos de les sessions plenàries
+          (Canal YouTube de l'Ajuntament) i els documents oficials (ordres del dia,
+          actes) es recopilen de manera automatitzada.
+        </li>
+        <li>
+          <strong>Transcripció automàtica</strong> — l'àudio es transcriu amb <em
+            >WhisperX</em
+          >, un model de reconeixement de veu, generant un text fidel amb
+          marcadors temporals per a cada intervenció.
+        </li>
+        <li>
+          <strong>Estructuració amb IA</strong> — un model de llenguatge mapeja cada
+          intervenció al seu punt de l'ordre del dia, identifica l'orador, genera
+          resums i calcula indicadors de to i polarització.
+        </li>
+        <li>
+          <strong>Anàlisi retòrica</strong> — les intervencions s'anoten amb categories
+          de discurs (propostes, dades, ideologia, atacs) per facilitar l'exploració
+          temàtica del debat polític.
+        </li>
+        <li>
+          <strong>Publicació oberta</strong> — totes les dades es publiquen en format
+          JSON obert i es visualitzen en una web estàtica, sense servidor ni registres.
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>IA responsable i transparent</h2>
+      <p>
+        L'ús d'intel·ligència artificial en aquest projecte segueix uns
+        principis clars: les dades d'entrada són públiques, el procés és
+        reproduïble, i els resultats s'ofereixen amb les seves limitacions
+        explícites. Les classificacions retòriques, per exemple, es presenten
+        com a experimentals perquè l'usuari pugui contrastar-les amb el text
+        original de la intervenció, sempre accessible amb un clic.
+      </p>
+      <p>
+        La IA no substitueix el criteri humà: és una eina per fer navegable un
+        volum d'informació que d'una altra manera seria pràcticament
+        inaccessible.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Mètriques</h2>
+      <h3>Polarització</h3>
+      <p>
+        Cada punt de l'ordre del dia rep una puntuació de polarització de 1 a 4:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Valor</th><th>Significat</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🟢 1</td><td>Unanimitat — tots els partits d'acord</td></tr>
+          <tr><td>🟡 2</td><td>Acord majoritari — acord amb matisos</td></tr>
+          <tr
+            ><td>🟠 3</td><td
+              >Desacord — diferències significatives entre partits</td
+            ></tr
+          >
+          <tr><td>🔴 4</td><td>Polarització màxima — desacord total</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: var(--s-lg);">Discurs d'odi</h3>
+      <p>
+        S'indica si en alguna intervenció d'un punt es detecta discurs d'odi,
+        insults greus o atacs personals fora del debat polític legítim.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Fonts de dades</h2>
+      <p>Totes les dades provenen de fonts públiques oficials:</p>
+      <ul>
+        <li>
+          <a
+            href="https://ajuntament.barcelona.cat/ca/informacio-administrativa/consell-municipal"
+            target="_blank"
+            rel="noopener">Consell Municipal de Barcelona</a
+          > — sessions, documents i vídeos de les sessions plenàries
+        </li>
+        <li>
+          <a
+            href="https://ajuntament.barcelona.cat/ca/informacio-administrativa/retribucions-i-declaracions"
+            target="_blank"
+            rel="noopener">Portal de retribucions</a
+          > — informació dels regidors i regidores
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Tecnologia</h2>
+      <p>
+        El projecte utilitza tecnologies obertes: <a
+          href="https://astro.build"
+          target="_blank"
+          rel="noopener">Astro</a
+        >
+        per a la web estàtica, <a
+          href="https://pagefind.app"
+          target="_blank"
+          rel="noopener">Pagefind</a
+        > per al cercador, WhisperX per a la transcripció i models de llenguatge per
+        a l'estructuració i l'anàlisi.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Contacte i llicència</h2>
+      <p>
+        <strong>plens.barcelona</strong> és un projecte cívic independent i no lucratiu.
+        Les dades generades es publiquen en obert perquè qualsevol persona, entitat
+        o projecte les pugui reutilitzar.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-content {
+    max-width: 700px;
+  }
+  .about-content h2 {
+    margin-bottom: var(--s-sm);
+  }
+  .about-content p,
+  .about-content li {
+    font-size: var(--fs-base);
+    line-height: 1.7;
+    color: var(--c-text);
+  }
+  .about-content ol,
+  .about-content ul {
+    padding-left: var(--s-lg);
+    margin-bottom: var(--s-md);
+  }
+  .about-content li {
+    margin-bottom: var(--s-sm);
+  }
+</style>

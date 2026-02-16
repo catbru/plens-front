@@ -1,0 +1,218 @@
+/* Rhetoric Annotation Styles */
+
+/* Base style for all rhetorical tags */
+.rh {
+    border-bottom: 2px solid;
+    cursor: help;
+    transition: background-color 0.2s;
+    padding-bottom: 2px;
+}
+
+.rh:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Specific Tag Styles */
+
+/* 🟢 PROPOSTA (Action) */
+.rh--fr-proposta {
+    border-color: #2E7D32;
+    /* Green 800 */
+    color: #1B5E20;
+}
+
+:root[data-theme="dark"] .rh--fr-proposta {
+    border-color: #66BB6A;
+    /* Green 400 */
+    color: #81C784;
+}
+
+/* 🟣 IDEOLOGIA (Values) */
+.rh--fr-ideologia {
+    border-color: #7B1FA2;
+    /* Purple 800 */
+    color: #4A148C;
+}
+
+:root[data-theme="dark"] .rh--fr-ideologia {
+    border-color: #AB47BC;
+    /* Purple 400 */
+    color: #BA68C8;
+}
+
+/* 🔵 DADA (Evidence) */
+.rh--fr-dada {
+    border-color: #1565C0;
+    /* Blue 800 */
+    color: #0D47A1;
+}
+
+:root[data-theme="dark"] .rh--fr-dada {
+    border-color: #42A5F5;
+    /* Blue 400 */
+    color: #64B5F6;
+}
+
+/* 🔴 ATAC (Conflict) */
+.rh--fr-atac {
+    border-color: #C62828;
+    /* Red 800 */
+    color: #B71C1C;
+}
+
+:root[data-theme="dark"] .rh--fr-atac {
+    border-color: #EF5350;
+    /* Red 400 */
+    color: #E57373;
+}
+
+/* Control Panel Toggle Styles (Simplified) */
+.rh-controls {
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rh-panel {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.rh-panel__title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.rh-toggle {
+    background: none;
+    border: 1px solid var(--c-border);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.6;
+    transition: all 0.2s;
+}
+
+.rh-toggle:hover {
+    background: var(--c-bg-subtle);
+    opacity: 0.8;
+}
+
+.rh-toggle--active {
+    opacity: 1;
+    background: var(--c-surface);
+    border-color: var(--c-text);
+    font-weight: 500;
+}
+
+/* Toggling visibility logic */
+/* In this new version, we only have one layer 'rhetoric', so maybe we don't need complex toggles, 
+   but keeping the structure in case we want to toggle individual tags later. */
+
+/* If a global class is added to hide annotations */
+.annotations-hidden .rh {
+    border-bottom: none;
+    color: inherit;
+    cursor: inherit;
+}
+
+/* Rhetoric panel (session page) */
+.rhetoric-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.rhetoric-panel__title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.rhetoric-panel__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.rh-legend-item {
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.rhetoric-panel__link {
+    margin-left: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--c-accent);
+}
+
+.rhetoric-panel__link:hover {
+    text-decoration: underline;
+}
+
+/* Toggle button */
+.rhetoric-panel__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.75rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: inherit;
+    transition: all 0.15s;
+}
+
+.rhetoric-panel__toggle:hover {
+    background: var(--c-bg-subtle);
+}
+
+.rhetoric-panel__toggle--off {
+    opacity: 0.5;
+}
+
+.rhetoric-panel__toggle-indicator {
+    font-size: 0.85rem;
+    color: #2E7D32;
+}
+
+.rhetoric-panel__toggle--off .rhetoric-panel__toggle-indicator {
+    color: #C62828;
+}
+
+/* Disclaimer */
+.rhet-disclaimer {
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+    background: #fef9c3;
+    border-left: 3px solid #eab308;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+}

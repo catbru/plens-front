@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  tags,
+  getInterventionsByTag,
+  partyClass,
+  polEmoji,
+  polClass,
+  polLabel,
+  slugify,
+  findSession,
+  youtubeTimestamp,
+  getInterventionAnchor,
+} from "../../lib/data";
+
+export function getStaticPaths() {
+  return tags.map((t) => ({
+    params: { code: String(t.code) },
+    props: { tag: t },
+  }));
+}
+
+const { code } = Astro.params;
+const { tag } = Astro.props;
+const tagInterventions = getInterventionsByTag(tag.code);
+
+// Partits que més hi intervenen
+const partyCount: Record<string, number> = {};
+tagInterventions.forEach((i) => {
+  if (i.speaker_party) {
+    partyCount[i.speaker_party] = (partyCount[i.speaker_party] || 0) + 1;
+  }
+});
+const topParties = Object.entries(partyCount)
+  .sort(([, a], [, b]) => b - a)
+  .slice(0, 6);
+
+// Party colors for filter buttons
+function partyColor(party: string): string {
+  const p = party.toLowerCase();
+  if (p.includes("psc")) return "var(--c-psc)";
+  if (p.includes("junts")) return "var(--c-junts)";
+  if (p.includes("comú") || p.includes("comu")) return "var(--c-bcomu)";
+  if (p.includes("erc")) return "var(--c-erc)";
+  if (p === "pp" || p.includes("popular")) return "var(--c-pp)";
+  if (p.includes("vox")) return "var(--c-vox)";
+  return "var(--c-text-muted)";
+}
+
+// Sessió count
+const sessionCount = new Set(tagInterventions.map((i) => i.session_id)).size;
+
+// Polarització
+const polValues = tagInterventions
+  .filter((i) => i.polarization)
+  .map((i) => i.polarization!);
+const avgPol =
+  polValues.length > 0
+    ? +(polValues.reduce((a, b) => a + b, 0) / polValues.length).toFixed(1)
+    : 0;
+const hateSpeechCount = tagInterventions.filter((i) => i.hate_speech).length;
+---
+
+<BaseLayout title={tag.name}>
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li><a href="/temes/">Temes</a></li>
+    <li>{tag.name}</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">{tag.name}</h1>
+    <p class="page-header__subtitle">{tag.description}</p>
+  </div>
+
+  <section class="section">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__value">{tagInterventions.length}</div>
+        <div class="stat__label">Intervencions</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{sessionCount}</div>
+        <div class="stat__label">Sessions</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{avgPol > 0 ? avgPol : "—"}</div>
+        <div class="stat__label">Polarització mitj.</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{hateSpeechCount}</div>
+        <div class="stat__label">Discurs d'odi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partits (clickable filters) -->
+  {
+    topParties.length > 0 && (
+      <section class="section">
+        <h2 class="section__title">Partits amb més intervencions</h2>
+        <div class="party-filters" id="party-filter">
+          <button class="filter-btn active" data-party="all">
+            Tots
+          </button>
+          {topParties.map(([party, count]) => (
+            <button
+              class="filter-btn"
+              data-party={party}
+              style={`--party-color: ${partyColor(party)};`}
+            >
+              {party} ({count})
+            </button>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Intervencions -->
+  <section class="section">
+    <h2 class="section__title" id="interventions-title">🎤 Intervencions</h2>
+    <div class="interventions-list" id="interventions-list">
+      {
+        tagInterventions.slice(0, 80).map((i) => {
+          const session = findSession(i.session_id);
+          return (
+            <div
+              class="intervention-item"
+              data-party={i.speaker_party || ""}
+              data-pagefind-body
+            >
+              <div class="intervention-item__header">
+                <div style="display:flex; align-items:center; gap: var(--s-sm); flex-wrap: wrap;">
+                  <a
+                    href={`/regidors/${slugify(i.speaker_name)}/`}
+                    class="intervention__name"
+                    style="font-weight:600;"
+                  >
+                    {i.speaker_name}
+                  </a>
+                  <span class={`badge ${partyClass(i.speaker_party)}`}>
+                    {i.speaker_party}
+                  </span>
+                  {i.polarization && (
+                    <span class={`badge ${polClass(i.polarization)}`}>
+                      {polEmoji(i.polarization)}
+                    </span>
+                  )}
+                  {i.hate_speech && <span class="badge badge--hate">⚠️</span>}
+                </div>
+                <a
+                  href={`/sessions/${i.session_id}/#${getInterventionAnchor(i)}`}
+                  class="intervention-item__session"
+                >
+                  📅 {i.session_date} — {i.agenda_item_title}
+                </a>
+              </div>
+              <p class="intervention__text">{i.text}</p>
+            </div>
+          );
+        })
+      }
+      {
+        tagInterventions.length > 80 && (
+          <p
+            id="truncation-msg"
+            style="text-align:center; padding: var(--s-lg); color: var(--c-text-muted);"
+          >
+            Mostrant 80 de {tagInterventions.length} intervencions.
+          </p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btns = document.querySelectorAll(".filter-btn");
+    const items = document.querySelectorAll(".intervention-item");
+    const title = document.getElementById("interventions-title");
+
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const party = btn.getAttribute("data-party");
+        let visible = 0;
+        items.forEach((item) => {
+          const el = item as HTMLElement;
+          if (party === "all" || item.getAttribute("data-party") === party) {
+            el.style.display = "";
+            visible++;
+          } else {
+            el.style.display = "none";
+          }
+        });
+        if (title) {
+          if (party === "all") {
+            title.textContent = `🎤 Intervencions`;
+          } else {
+            title.textContent = `🎤 Intervencions de ${party} (${visible})`;
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .interventions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-md);
+  }
+  .intervention-item {
+    padding: var(--s-md);
+    background: var(--c-bg-alt);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--c-border);
+  }
+  .intervention-item__header {
+    margin-bottom: var(--s-sm);
+  }
+  .intervention-item__session {
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+    display: block;
+    margin-top: var(--s-xs);
+  }
+
+  .party-filters {
+    display: flex;
+    gap: var(--s-sm);
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    cursor: pointer;
+    padding: var(--s-xs) var(--s-md);
+    border: 2px solid var(--party-color, var(--c-border));
+    border-radius: 99px;
+    background: var(--c-bg);
+    color: var(--party-color, var(--c-text));
+    font-family: var(--font);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover {
+    background: var(--party-color, var(--c-text));
+    color: #fff;
+  }
+  .filter-btn.active {
+    background: var(--party-color, var(--c-text));
+    color: #fff;
+    border-color: var(--party-color, var(--c-text));
+  }
+  .filter-btn.active[data-party*="ERC"] {
+    color: #1a1a1a;
+  }
+  .filter-btn:hover[data-party*="ERC"] {
+    color: #1a1a1a;
+  }
+</style>

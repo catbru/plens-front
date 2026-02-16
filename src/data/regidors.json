@@ -1,0 +1,778 @@
+{
+    "extract_date": "2026-02-13T21:39:58.477611",
+    "regidors": [
+        {
+            "name": "Neus Munté Fernández",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_NeusMunteFernandez.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/neus.munte",
+                "twitter": "https://twitter.com/neusmunte",
+                "instagram": "https://www.instagram.com/neusmunte/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Neus%20Munt%C3%A9%20Fern%C3%A1ndez_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10841",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10842"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Jordi Martí Galbis",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JordiMartiGalbis.jpg",
+            "salary": "96.304 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/jordi.martigalbis",
+                "twitter": "https://twitter.com/jmartigalbis",
+                "instagram": "https://www.instagram.com/jordimartigalbis/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jordi%20Mart%C3%AD%20Galbis_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10579",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10578"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Victòria Alsina Burgués",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/CLL_06_victoriaalsina_Foto.jpg",
+            "salary": null,
+            "dedication": "especial, no té assignada una retribució, i només percep, si escau, les dietes que li corresponguin per l’assistència efectiva a les sessions del Consell Municipal (Plenari i Comissions), amb un màxim de 33.921 euros anuals.",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/_VictoriaAlsina"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Vict%C3%B2ria%20Alsina%20i%20Burgu%C3%A9s_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10584",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10583"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Damià Calvet Valera",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_DamiaCalvetiValera.jpg",
+            "salary": "79.715 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/damiacalvet/",
+                "twitter": "https://twitter.com/damiacalvet",
+                "instagram": "https://www.instagram.com/damiacalvet/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Dami%C3%A0%20Calvet%20i%20Valera_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10568",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10571"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Joana Ortega Alemany",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JoanaOrtegaiAlemany.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/joanaortega"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Joana%20Ortega%20i%20Alemany_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10708",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10711"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Josep Rius Alcaraz",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JosepRiusiAlcaraz.jpg",
+            "salary": null,
+            "dedication": "especial, no té assignada una retribució, i només percep, si escau, les dietes que li corresponguin per l’assistència efectiva a les sessions del Consell Municipal (Plenari i Comissions), amb un màxim de 33.921 euros anuals.",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/josep_rius",
+                "instagram": "https://www.instagram.com/pep_bcn/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Josep%20Rius%20i%20Alcaraz_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10565",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10562"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Joan Rodríguez Portell",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JoanRodrigueziPortell.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/joanrportell",
+                "instagram": "https://www.instagram.com/joanrportell/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Joan%20Rodr%C3%ADguez%20i%20Portell_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10784",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10785"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Maria Assumpció Laïlla Jou",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_MariaAssumpcioLailla.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/titon.laillajou",
+                "twitter": "https://twitter.com/titonlailla",
+                "instagram": "https://www.instagram.com/titonlaillajou/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Maria%20Assumpci%C3%B3%20La%C3%AFlla%20i%20Jou_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10561",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10564"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Francina Vila Valls",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_FrancinaVilaiValls.jpg",
+            "salary": "58.643 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/francina.valls",
+                "twitter": "https://twitter.com/francina_vila",
+                "instagram": "https://www.instagram.com/francinavilai/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Francina%20Vila%20i%20Valls_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10787",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10790"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Maria del Carmen Lleó Ribal",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/CLL_06_mariadelcarmelleo_Foto.jpg",
+            "salary": "58.643 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://x.com/lleocarme"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/CLL_06_Carme%20Lle%C3%B3%20Ribal_CVCA%20%28002%29.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-17521",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-17541"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Arnau Vives i Juan",
+            "party": "Junts per Barcelona",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/juntsxbcn_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_ArnauVivesJuan.jpg",
+            "salary": "49.846 euros",
+            "dedication": "parcial 85%",
+            "email": null,
+            "social_media": {
+                "twitter": "https://x.com/arnauvivesjuan",
+                "instagram": "https://www.instagram.com/arnauvives_bcn/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Arnau%20Vives%20i%20Juan_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-18401",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-18402"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Jaume Collboni Cuadrado",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/JaumeCollboniCuadrado_Foto.jpg",
+            "salary": "104.000 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/jaumecollbonicuadrado/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jaume%20Collboni_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10441",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10442"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Maria Eugènia Gay Rosell",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_MariaEugeniaGayRosell_Foto_143x192.jpg",
+            "salary": "102.120 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/mariaeugeniagay",
+                "instagram": "https://www.instagram.com/mariaeugeniagay/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Maria%20Eug%C3%A8nia%20Gay%20Rosell_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10667",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10684"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Laia Bonet Rull",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_LaiaBonetRull_Foto_143x192.jpg",
+            "salary": "102.120 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/laiabonetrull",
+                "instagram": "https://www.instagram.com/laiabonetrull/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Laia%20Bonet%20Rull_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-11027",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-11030"
+            },
+            "last_update": "14/01/2026"
+        },
+        {
+            "name": "Albert Batlle Bastardas",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_AlbertbatlleiBastardas_Foto_143x192.jpg",
+            "salary": "102.120 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/Albert_Batlle_B"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Albert%20Batlle%20Bastardas_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10768",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10782"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "David Escudé Rodríguez",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_DavidEscudeRodriguez.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/david.escude",
+                "twitter": "https://twitter.com/david_escude",
+                "instagram": "https://www.instagram.com/david_escude/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_David%20Escud%C3%A9%20Rodr%C3%ADguez_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10789",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10788"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Marta Villanueva Cendán",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_MartaVillanuevaCendan_Foto_143x192.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/mvillanuce",
+                "twitter": "https://twitter.com/mvillacendan",
+                "instagram": "https://www.instagram.com/martavillanueva/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Marta%20Villanueva%20Cend%C3%A1n_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10701",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10702"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Josep Lluis Franco Rabell",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JosepLluisFrancoRabell_Foto_143x192.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/lluis.rabell/",
+                "twitter": "https://twitter.com/RabellLluis",
+                "instagram": "https://www.instagram.com/jlluis_rabell/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Josep%20Llu%C3%ADs%20Franco%20Rabell_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10778",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10781"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Jordi Valls Riera",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JordiVallsRiera_Foto_143x192.jpg",
+            "salary": "102.120 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/jordivalls13"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jordi%20Valls%20Riera_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10764",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10765"
+            },
+            "last_update": "14/01/2026"
+        },
+        {
+            "name": "Raquel Gil Eiroá",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Raquel_Gil_143x192.jpg",
+            "salary": "102.120 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/rgileiroa",
+                "instagram": "https://www.instagram.com/rgileiroa/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Raquel%20Gil%20Eiro%C3%A1_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10819",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10820"
+            },
+            "last_update": "14/01/2026"
+        },
+        {
+            "name": "Francesc Xavier Marcé Carol",
+            "party": "PSC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/PSC_Nou-Logo_45X45_sr63U1H.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Xavier_Marce_143x192.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "instagram": "https://www.instagram.com/xaviermarcec"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Francesc%20Xavier%20Marc%C3%A9%20Carol_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-15121",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-15141"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Guille López Ginés",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_GuilleLopezGines_Foto_143x192.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/guillelopez_",
+                "linkedin": "https://www.linkedin.com/in/guille"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Guille%20L%C3%B3pez%20Gin%C3%A9s_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10661",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10822"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Gemma Tarafa Orpinell",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_GemmaTarafaOrpinell_Foto_143x192.jpg",
+            "salary": null,
+            "dedication": "especial, no té assignada una retribució, i només percep, si escau, les dietes que li corresponguin per l’assistència efectiva a les sessions del Consell Municipal (Plenari i Comissions), amb un màxim de 33.921 euros anuals.",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/gemmatarafa",
+                "instagram": "https://instagram.com/gemma_tarafa"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Gemma%20Tarafa%20Orpinell_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10921",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10945"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Lucia Martín González",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_LuciaMartinGonzalez_Foto_143x192.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/lucia_marting",
+                "instagram": "https://instagram.com/lucia____martin"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Luc%C3%ADa%20Mart%C3%ADn%20Gonz%C3%A1lez_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10958",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-11015"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Marc Serra Solé",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_MarcSerraSole_Foto_143x192.jpg",
+            "salary": null,
+            "dedication": "especial, no té assignada una retribució, i només percep, si escau, les dietes que li corresponguin per l’assistència efectiva a les sessions del Consell Municipal (Plenari i Comissions), amb un màxim de 33.921 euros anuals.",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/marcserrasole",
+                "instagram": "https://instagram.com/marcserrasole"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Marc%20Serra%20Sol%C3%A9_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-11007",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-11008"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Jessica González Herrera",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JessGonzalezHerrera_Foto_143x192.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/jess.g.h",
+                "twitter": "https://twitter.com/jessgh_",
+                "instagram": "https://instagram.com/jessgh_",
+                "linkedin": "https://www.linkedin.com/in/jessgh"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jessica%20Gonz%C3%A1lez%20Herrera_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10865",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10866"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Carolina Recio Cáceres",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_CarolinaRecioCaceres_Foto_143x192.jpg",
+            "salary": "79.715 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/carolina.r.caceres.9",
+                "twitter": "https://twitter.com/carolainrc",
+                "instagram": "https://instagram.com/carolreciocaceres"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Carolina%20Recio%20C%C3%A1ceres_CVCA.PDF",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10881",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10967"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Pau Gonzàlez Val",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_PauGonzalezVal_Foto_143x192.jpg",
+            "salary": "14.661 euros",
+            "dedication": "parcial 25%",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/pau.g.val",
+                "twitter": "https://twitter.com/paugv87",
+                "instagram": "https://www.instagram.com/paugv87/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Pau%20Gonz%C3%A0lez%20Val_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-15561",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-15562"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Jordi Rabassa Massons",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JordiRabassaMassons_Foto_143x192.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {},
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jordi%20Rabassa%20Massons_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-17701",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-17721"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Tània Corrons Mellado",
+            "party": "Barcelona en comú",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/Barcelona%20en%20comu_mmQd6zw.png",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Tania_Corrons_Mellado.jpg",
+            "salary": "58.643 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {},
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_T%C3%A0nia%20Corrons%20Mellado_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-20401",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-20402"
+            },
+            "last_update": "05/02/2026"
+        },
+        {
+            "name": "Elisenda Alamany Gutierrez",
+            "party": "ERC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/simbol-ERC.JPG",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_ElisendaAlamanyiGutierrez_Foto_143x192.jpg",
+            "salary": "96.304 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/elisenda.alamany/",
+                "twitter": "https://twitter.com/Elisendalamany",
+                "instagram": "https://www.instagram.com/elisendaalamany/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Elisenda%20Alamany%20i%20Guti%C3%A9rrez_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10950",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10951"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Jordi Castellana Gamisans",
+            "party": "ERC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/simbol-ERC.JPG",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JordiCastellanaiGamisans_Foto_143x192.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/jcasteg",
+                "instagram": "https://www.instagram.com/jcasteg/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jordi%20Castellana%20i%20Gamisans_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10981",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10982"
+            },
+            "last_update": "14/01/2026"
+        },
+        {
+            "name": "Eva Baró Ramos",
+            "party": "ERC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/simbol-ERC.JPG",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_EvaBaro%CC%81iRamos_Foto_143x192.jpg",
+            "salary": "78.329 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/eva.baro.564",
+                "twitter": "https://twitter.com/evabaror",
+                "instagram": "https://www.instagram.com/eva.baro.ramos/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Eva%20Bar%C3%B3%20i%20Ramos_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10815",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10772"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Jordi Coronas Martorell",
+            "party": "ERC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/simbol-ERC.JPG",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_JordiCoronas.jpg",
+            "salary": "79.715 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/jordicoronas",
+                "instagram": "https://www.instagram.com/jordicoronas/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Jordi%20Coronas%20i%20Martorell_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10681",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10683"
+            },
+            "last_update": "16/09/2025"
+        },
+        {
+            "name": "Rosa Suriñach Frigola",
+            "party": "ERC",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/simbol-ERC.JPG",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_RosaSuri%C3%B1ach.jpg",
+            "salary": "66.579 euros",
+            "dedication": "parcial 85%",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/rosasuri"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Rosa%20Suri%C3%B1ach%20i%20Fr%C3%ADgola_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-15761",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-15881"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Daniel Sirera Bellés",
+            "party": "PP",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/pp_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_DanielSireraBelles_Foto_143x192.jpg",
+            "salary": "96.304 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/danisirerabarcelona",
+                "twitter": "https://twitter.com/danielsirera",
+                "instagram": "https://www.instagram.com/danisirera/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Daniel%20Sirera%20Bell%C3%A9s_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10714",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10715"
+            },
+            "last_update": "20/11/2025"
+        },
+        {
+            "name": "Víctor Martí de Villasante",
+            "party": "PP",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/pp_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_VictorMartideVillasante_Foto_143x192.jpg",
+            "salary": "79.715 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/victor.devillasante",
+                "twitter": "https://twitter.com/vctormart3",
+                "instagram": "https://www.instagram.com/vmdv/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_V%C3%ADctor%20Mart%C3%AD%20de%20Villasante_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10798",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10799"
+            },
+            "last_update": "12/01/2026"
+        },
+        {
+            "name": "Sonia Devesa Rius",
+            "party": "PP",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/pp_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_SoniaDevesaRius_143x192.jpg",
+            "salary": "87.913 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {},
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/CLL_D02_Sonia%20Devesa%20Rius_CVCA.pdf"
+            },
+            "last_update": "26/01/2026"
+        },
+        {
+            "name": "Antonio Verdera Puntí",
+            "party": "PP",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/pp_45x45.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/Antonio_Verdera_Punti_143x192.jpg",
+            "salary": "66.579 euros",
+            "dedication": "parcial 85%",
+            "email": null,
+            "social_media": {},
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/CLL_D10_Antonio%20Verdera%20Punt%C3%AD_CVCA.pdf"
+            },
+            "last_update": "12/01/2026"
+        },
+        {
+            "name": "Gonzalo de Oro-Pulido Plaza",
+            "party": "VOX",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/vox_45x45%20%E2%80%93%201.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_GonzalodeOro-PulidoPlaza_Foto_143x192.jpg",
+            "salary": "96.304 euros",
+            "dedication": "exclusiva",
+            "email": null,
+            "social_media": {
+                "facebook": "https://www.facebook.com/gonzalo.deoropulido",
+                "twitter": "https://twitter.com/gonzalodeoro",
+                "instagram": "https://www.instagram.com/gonzalodeoro/",
+                "linkedin": "https://www.linkedin.com/in/gonzalo-de-oro-pulido-plaza-6678151b/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Gonzalo%20de%20Oro-Pulido%20Plaza_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10796",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10801"
+            },
+            "last_update": "30/01/2026"
+        },
+        {
+            "name": "Liberto Mariano Senderos Oliva",
+            "party": "VOX",
+            "party_logo": "https://apidocs.barcelona.cat/retribucions_pro/partitspolitics/vox_45x45%20%E2%80%93%201.jpg",
+            "photo": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_LibertoSenderosOliva_Foto_143x192.jpg",
+            "salary": "74.726 euros",
+            "dedication": "parcial 85%",
+            "email": null,
+            "social_media": {
+                "twitter": "https://twitter.com/libertomso",
+                "instagram": "https://www.instagram.com/liberto_senderos/"
+            },
+            "links": {
+                "cv": "https://apidocs.barcelona.cat/retribucions_pro/REG_AJB_Liberto%20Mariano%20Senderos%20Oliva_CVCA.pdf",
+                "declaracio_bens": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/bens/declaracio-inicial-10793",
+                "declaracio_activitats": "https://seuelectronica.ajuntament.barcelona.cat/ca/registres-dinteressos/activitats/declaracio-inicial-10795"
+            },
+            "last_update": "16/09/2025"
+        }
+    ]
+}

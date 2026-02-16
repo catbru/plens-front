@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getRegidorsWithStats, partyClass } from "../../lib/data";
+
+const regidors = getRegidorsWithStats();
+const parties = [...new Set(regidors.map((r) => r.party))].sort();
+
+// Map party names to CSS color variables
+function partyColor(party: string): string {
+  const p = party.toLowerCase();
+  if (p.includes("psc")) return "var(--c-psc)";
+  if (p.includes("junts")) return "var(--c-junts)";
+  if (p.includes("comú") || p.includes("comu")) return "var(--c-bcomu)";
+  if (p.includes("erc")) return "var(--c-erc)";
+  if (p === "pp" || p.includes("popular")) return "var(--c-pp)";
+  if (p.includes("vox")) return "var(--c-vox)";
+  return "var(--c-text-muted)";
+}
+---
+
+<BaseLayout title="Regidors">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li>Regidors</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">Regidors i regidores</h1>
+    <p class="page-header__subtitle">
+      {regidors.length} membres del Consell Municipal
+    </p>
+  </div>
+
+  <!-- Filtre per partit -->
+  <div class="filters" id="party-filter">
+    <button class="filter-btn active" data-party="all">Tots</button>
+    {
+      parties.map((p) => (
+        <button
+          class="filter-btn"
+          data-party={p}
+          style={`--party-color: ${partyColor(p)};`}
+        >
+          {p}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="grid grid-4" id="regidors-grid">
+    {
+      regidors.map((r) => (
+        <a
+          href={`/regidors/${r.slug}/`}
+          class="card regidor-card"
+          data-party={r.party}
+        >
+          <img
+            src={r.photo}
+            alt={r.name}
+            class="regidor-card__photo"
+            loading="lazy"
+          />
+          <div class="regidor-card__name">{r.name}</div>
+          <span class={`badge ${partyClass(r.party)}`}>{r.party}</span>
+          <div class="regidor-card__stats">
+            <span>{r.interventionCount} intervencions</span>
+            <span>{r.sessionCount} sessions</span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btns = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".regidor-card");
+
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const party = btn.getAttribute("data-party");
+        cards.forEach((card) => {
+          const el = card as HTMLElement;
+          if (party === "all" || card.getAttribute("data-party") === party) {
+            el.style.display = "";
+          } else {
+            el.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .regidor-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-sm);
+  }
+  .regidor-card__photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--c-border);
+  }
+  .regidor-card__name {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  .regidor-card__stats {
+    display: flex;
+    gap: var(--s-md);
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+  }
+
+  .filter-btn {
+    cursor: pointer;
+    padding: var(--s-xs) var(--s-md);
+    border: 2px solid var(--party-color, var(--c-border));
+    border-radius: 99px;
+    background: var(--c-bg);
+    color: var(--party-color, var(--c-text));
+    font-family: var(--font);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover {
+    background: var(--party-color, var(--c-text));
+    color: #fff;
+  }
+  .filter-btn.active {
+    background: var(--party-color, var(--c-text));
+    color: #fff;
+    border-color: var(--party-color, var(--c-text));
+  }
+  /* ERC is yellow-on-white, needs dark text when active */
+  .filter-btn.active[data-party*="ERC"] {
+    color: #1a1a1a;
+  }
+  .filter-btn:hover[data-party*="ERC"] {
+    color: #1a1a1a;
+  }
+</style>

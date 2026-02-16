@@ -1,0 +1,309 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  interventions,
+  getSessionsWithStats,
+  getRegidorsWithStats,
+  getTagsWithStats,
+  polEmoji,
+  polClass,
+  polLabel,
+  partyClass,
+} from "../lib/data";
+
+const sessionsStats = getSessionsWithStats();
+const regidorsStats = getRegidorsWithStats();
+const tagsStats = getTagsWithStats();
+
+const totalInterventions = interventions.length;
+const totalSessions = sessionsStats.length;
+const totalRegidors = regidorsStats.filter(
+  (r) => r.interventionCount > 0,
+).length;
+const parties = [
+  ...new Set(interventions.map((i) => i.speaker_party).filter(Boolean)),
+];
+
+// Últimes 5 sessions
+const latestSessions = sessionsStats.slice(0, 5);
+
+// Polarització global
+const polDist = [1, 2, 3, 4].map((level) => ({
+  level,
+  count: interventions.filter((i) => i.polarization === level).length,
+  emoji: polEmoji(level),
+  label: polLabel(level),
+}));
+---
+
+<BaseLayout title="Inici">
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero__title">plens.barcelona</h1>
+    <p class="hero__subtitle">
+      Explorador dels plens del Consell Municipal de Barcelona. Totes les
+      intervencions, regidors i temàtiques a un clic.
+    </p>
+  </section>
+
+  <!-- Stats -->
+  <section class="section">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__value">
+          {totalInterventions.toLocaleString("ca-ES")}
+        </div>
+        <div class="stat__label">Intervencions</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{totalSessions}</div>
+        <div class="stat__label">Sessions</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{totalRegidors}</div>
+        <div class="stat__label">Regidors actius</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">{parties.length}</div>
+        <div class="stat__label">Partits</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accés ràpid -->
+  <section class="section">
+    <div class="grid grid-4 quick-links">
+      <a href="/sessions/" class="card quick-link">
+        <span class="quick-link__icon">📅</span>
+        <span class="quick-link__text">Sessions plenàries</span>
+      </a>
+      <a href="/regidors/" class="card quick-link">
+        <span class="quick-link__icon">👤</span>
+        <span class="quick-link__text">Regidors</span>
+      </a>
+      <a href="/temes/" class="card quick-link">
+        <span class="quick-link__icon">🏷️</span>
+        <span class="quick-link__text">Temes</span>
+      </a>
+      <a href="/retorica/" class="card quick-link">
+        <span class="quick-link__icon">🎭</span>
+        <span class="quick-link__text">Retòrica</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Últimes sessions -->
+  <section class="section">
+    <h2 class="section__title">📅 Últimes sessions</h2>
+    <div class="grid grid-2">
+      {
+        latestSessions.map((s) => (
+          <a href={`/sessions/${s.sessionId}/`} class="card session-card">
+            <div class="session-card__date">{s.date}</div>
+            <div class="session-card__title">{s.title}</div>
+            <div class="session-card__meta">
+              <span class="badge badge--tag">
+                {s.interventionCount} intervencions
+              </span>
+              <span class="badge badge--tag">{s.agendaItemCount} punts</span>
+              {s.avgPolarization > 0 && (
+                <span class={`badge ${polClass(s.avgPolarization)}`}>
+                  {polEmoji(s.avgPolarization)} {polLabel(s.avgPolarization)}
+                </span>
+              )}
+              {s.hasHateSpeech && (
+                <span class="badge badge--hate">⚠️ Discurs d'odi</span>
+              )}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Polarització -->
+  <section class="section">
+    <h2 class="section__title">📊 Polarització global</h2>
+    <div class="pol-bars">
+      {
+        polDist.map((p) => {
+          const pct =
+            totalInterventions > 0
+              ? Math.round((p.count / totalInterventions) * 100)
+              : 0;
+          return (
+            <div class="pol-bar">
+              <div class="pol-bar__label">
+                {p.emoji} {p.label}
+              </div>
+              <div class="pol-bar__track">
+                <div
+                  class={`pol-bar__fill pol-bar__fill--${p.level}`}
+                  style={`width: ${pct}%`}
+                />
+              </div>
+              <div class="pol-bar__value">
+                {p.count} ({pct}%)
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- Top regidors -->
+  <section class="section">
+    <h2 class="section__title">🎤 Regidors més actius</h2>
+    <div class="grid grid-4">
+      {
+        regidorsStats.slice(0, 8).map((r) => (
+          <a href={`/regidors/${r.slug}/`} class="card regidor-mini">
+            <img
+              src={r.photo}
+              alt={r.name}
+              class="regidor-mini__photo"
+              loading="lazy"
+            />
+            <div class="regidor-mini__name">{r.name}</div>
+            <span class={`badge ${partyClass(r.party)}`}>{r.party}</span>
+            <div class="regidor-mini__count">
+              {r.interventionCount} intervencions
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <p style="text-align:center; margin-top: var(--s-lg);">
+      <a href="/regidors/">Veure tots els regidors →</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--s-3xl) 0 var(--s-xl);
+  }
+  .hero__title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--c-accent), #b00020);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero__subtitle {
+    font-size: var(--fs-lg);
+    color: var(--c-text-muted);
+    max-width: 600px;
+    margin: var(--s-md) auto 0;
+  }
+
+  .quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-sm);
+    text-align: center;
+    padding: var(--s-xl);
+  }
+  .quick-link__icon {
+    font-size: 2rem;
+  }
+  .quick-link__text {
+    font-weight: 600;
+  }
+
+  .session-card__date {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-xs);
+  }
+  .session-card__title {
+    font-weight: 600;
+    margin-bottom: var(--s-sm);
+  }
+  .session-card__meta {
+    display: flex;
+    gap: var(--s-xs);
+    flex-wrap: wrap;
+  }
+
+  .pol-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-md);
+    max-width: 600px;
+  }
+  .pol-bar {
+    display: grid;
+    grid-template-columns: 180px 1fr 100px;
+    align-items: center;
+    gap: var(--s-md);
+  }
+  .pol-bar__label {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .pol-bar__track {
+    height: 24px;
+    background: var(--c-bg-alt);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .pol-bar__fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 1s ease;
+  }
+  .pol-bar__fill--1 {
+    background: var(--c-pol-1);
+  }
+  .pol-bar__fill--2 {
+    background: var(--c-pol-2);
+  }
+  .pol-bar__fill--3 {
+    background: var(--c-pol-3);
+  }
+  .pol-bar__fill--4 {
+    background: var(--c-pol-4);
+  }
+  .pol-bar__value {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    text-align: right;
+  }
+
+  .regidor-mini {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-xs);
+  }
+  .regidor-mini__photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .regidor-mini__name {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  .regidor-mini__count {
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 2.5rem;
+    }
+    .pol-bar {
+      grid-template-columns: 1fr;
+      gap: var(--s-xs);
+    }
+  }
+</style>

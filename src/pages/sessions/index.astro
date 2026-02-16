@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  getSessionsWithStats,
+  polEmoji,
+  polClass,
+  polLabel,
+} from "../../lib/data";
+
+const sessions = getSessionsWithStats();
+---
+
+<BaseLayout title="Sessions plenàries">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <li><a href="/">Inici</a></li>
+    <li>Sessions</li>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-header__title">Sessions plenàries</h1>
+    <p class="page-header__subtitle">
+      {sessions.length} sessions del Consell Municipal de Barcelona
+    </p>
+  </div>
+
+  <div class="sessions-list">
+    {
+      sessions.map((s) => (
+        <a href={`/sessions/${s.sessionId}/`} class="card session-row">
+          <div class="session-row__date">{s.date}</div>
+          <div class="session-row__info">
+            <div class="session-row__title">{s.title}</div>
+            <div class="session-row__meta">
+              <span class="badge badge--tag">
+                {s.interventionCount} intervencions
+              </span>
+              <span class="badge badge--tag">{s.agendaItemCount} punts</span>
+              {s.rhetoricTagCount > 0 && (
+                <span class="badge badge--tag">
+                  🎭 {s.rhetoricTagCount} etiquetes
+                </span>
+              )}
+              {s.avgPolarization > 0 && (
+                <span class={`badge ${polClass(s.avgPolarization)}`}>
+                  {polEmoji(s.avgPolarization)} {polLabel(s.avgPolarization)}
+                </span>
+              )}
+              {s.hasHateSpeech && (
+                <span class="badge badge--hate">⚠️ Discurs d'odi</span>
+              )}
+            </div>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .sessions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-sm);
+  }
+  .session-row {
+    display: flex;
+    gap: var(--s-lg);
+    align-items: flex-start;
+    padding: var(--s-md) var(--s-lg);
+  }
+  .session-row__date {
+    min-width: 100px;
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--c-accent);
+    padding-top: 2px;
+  }
+  .session-row__title {
+    font-weight: 600;
+    margin-bottom: var(--s-xs);
+  }
+  .session-row__meta {
+    display: flex;
+    gap: var(--s-xs);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .session-row {
+      flex-direction: column;
+      gap: var(--s-xs);
+    }
+    .session-row__date {
+      min-width: auto;
+    }
+  }
+</style>
