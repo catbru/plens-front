@@ -73,19 +73,19 @@ const polDist = [1, 2, 3, 4].map((level) => ({
   <!-- Accés ràpid -->
   <section class="section">
     <div class="grid grid-4 quick-links">
-      <a href="/sessions/" class="card quick-link">
+      <a href={`${import.meta.env.BASE_URL}sessions/`} class="card quick-link">
         <span class="quick-link__icon">📅</span>
         <span class="quick-link__text">Sessions plenàries</span>
       </a>
-      <a href="/regidors/" class="card quick-link">
+      <a href={`${import.meta.env.BASE_URL}regidors/`} class="card quick-link">
         <span class="quick-link__icon">👤</span>
         <span class="quick-link__text">Regidors</span>
       </a>
-      <a href="/temes/" class="card quick-link">
+      <a href={`${import.meta.env.BASE_URL}temes/`} class="card quick-link">
         <span class="quick-link__icon">🏷️</span>
         <span class="quick-link__text">Temes</span>
       </a>
-      <a href="/retorica/" class="card quick-link">
+      <a href={`${import.meta.env.BASE_URL}retorica/`} class="card quick-link">
         <span class="quick-link__icon">🎭</span>
         <span class="quick-link__text">Retòrica</span>
       </a>
@@ -98,7 +98,10 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     <div class="grid grid-2">
       {
         latestSessions.map((s) => (
-          <a href={`/sessions/${s.sessionId}/`} class="card session-card">
+          <a
+            href={`${import.meta.env.BASE_URL}sessions/${s.sessionId}/`}
+            class="card session-card"
+          >
             <div class="session-card__date">{s.date}</div>
             <div class="session-card__title">{s.title}</div>
             <div class="session-card__meta">
@@ -158,7 +161,10 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     <div class="grid grid-4">
       {
         regidorsStats.slice(0, 8).map((r) => (
-          <a href={`/regidors/${r.slug}/`} class="card regidor-mini">
+          <a
+            href={`${import.meta.env.BASE_URL}regidors/${r.slug}/`}
+            class="card regidor-mini"
+          >
             <img
               src={r.photo}
               alt={r.name}
@@ -175,7 +181,9 @@ const polDist = [1, 2, 3, 4].map((level) => ({
       }
     </div>
     <p style="text-align:center; margin-top: var(--s-lg);">
-      <a href="/regidors/">Veure tots els regidors →</a>
+      <a href={`${import.meta.env.BASE_URL}regidors/`}
+        >Veure tots els regidors →</a
+      >
     </p>
   </section>
 </BaseLayout>
