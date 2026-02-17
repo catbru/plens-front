@@ -30,13 +30,22 @@ const {
           <span class="site-header__logo-icon">🏛️</span>
           <span class="site-header__logo-text">plens.barcelona</span>
         </a>
-        <nav class="site-nav" aria-label="Navegació principal">
+        <nav class="site-nav" id="site-nav" aria-label="Navegació principal">
           <a href={`${import.meta.env.BASE_URL}sessions/`}>Sessions</a>
           <a href={`${import.meta.env.BASE_URL}regidors/`}>Regidors</a>
           <a href={`${import.meta.env.BASE_URL}temes/`}>Temes</a>
           <a href={`${import.meta.env.BASE_URL}retorica/`}>Retòrica</a>
           <a href={`${import.meta.env.BASE_URL}intervencions/`}>Cercador</a>
+          <a href={`${import.meta.env.BASE_URL}about/`}>Sobre</a>
         </nav>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Obrir menú"
+          aria-expanded="false"
+        >
+          <span class="nav-toggle__icon"></span>
+        </button>
       </div>
     </header>
 
@@ -102,6 +111,52 @@ const {
         border-bottom-color: var(--c-accent);
       }
 
+      /* Hamburger toggle — hidden on desktop */
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--s-sm);
+        z-index: 110;
+      }
+      .nav-toggle__icon,
+      .nav-toggle__icon::before,
+      .nav-toggle__icon::after {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--c-text);
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: relative;
+      }
+      .nav-toggle__icon::before,
+      .nav-toggle__icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 22px;
+      }
+      .nav-toggle__icon::before {
+        top: -7px;
+      }
+      .nav-toggle__icon::after {
+        top: 7px;
+      }
+      /* Animate to X when open */
+      .nav-toggle[aria-expanded="true"] .nav-toggle__icon {
+        background: transparent;
+      }
+      .nav-toggle[aria-expanded="true"] .nav-toggle__icon::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+      .nav-toggle[aria-expanded="true"] .nav-toggle__icon::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+
       .main-content {
         min-height: calc(100vh - var(--header-height) - 120px);
         padding-top: var(--s-lg);
@@ -126,16 +181,57 @@ const {
       }
 
       @media (max-width: 768px) {
+        .nav-toggle {
+          display: block;
+        }
         .site-nav {
-          gap: var(--s-md);
+          display: none;
+          position: absolute;
+          top: var(--header-height);
+          left: 0;
+          right: 0;
+          background: var(--c-bg);
+          flex-direction: column;
+          padding: var(--s-md) var(--s-lg);
+          border-bottom: 2px solid var(--c-accent);
+          box-shadow: var(--shadow-md);
+          gap: 0;
+        }
+        .site-nav.is-open {
+          display: flex;
         }
         .site-nav a {
-          font-size: var(--fs-xs);
+          font-size: var(--fs-base);
+          padding: var(--s-sm) 0;
+          border-bottom: 1px solid var(--c-border-light);
+        }
+        .site-nav a:last-child {
+          border-bottom: none;
         }
         .site-header__logo-text {
           font-size: var(--fs-base);
         }
       }
     </style>
+
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("nav-toggle");
+        const nav = document.getElementById("site-nav");
+        if (!btn || !nav) return;
+        btn.addEventListener("click", () => {
+          const open = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!open));
+          nav.classList.toggle("is-open", !open);
+        });
+        // Close menu when clicking a link
+        nav.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => {
+            btn.setAttribute("aria-expanded", "false");
+            nav.classList.remove("is-open");
+          });
+        });
+      });
+    </script>
   </body>
 </html>
