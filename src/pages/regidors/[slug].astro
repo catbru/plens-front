@@ -133,7 +133,10 @@ const hateSpeechCount = myInterventions.filter((i) => i.hate_speech).length;
         <h2 class="section__title">🏷️ Temes principals</h2>
         <div style="display:flex; gap: var(--s-sm); flex-wrap: wrap;">
           {topTags.map(([code, tag]) => (
-            <a href={`/temes/${code}/`} class="badge badge--tag">
+            <a
+              href={`${import.meta.env.BASE_URL}temes/${code}/`}
+              class="badge badge--tag"
+            >
               {tag.name} ({tag.count})
             </a>
           ))}
@@ -153,7 +156,7 @@ const hateSpeechCount = myInterventions.filter((i) => i.hate_speech).length;
             <div class="intervention-item" data-pagefind-body>
               <div class="intervention-item__header">
                 <a
-                  href={`/sessions/${i.session_id}/#${getInterventionAnchor(i)}`}
+                  href={`${import.meta.env.BASE_URL}sessions/${i.session_id}/#${getInterventionAnchor(i)}`}
                   class="intervention-item__session"
                 >
                   📅 {i.session_date} — {i.session_title}

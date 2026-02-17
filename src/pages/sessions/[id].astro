@@ -34,6 +34,14 @@ const agendaGroups = groupByAgendaItem(sessionInterventions);
 const ytId = getYouTubeId(session.video_url);
 const annotatedSession = getAnnotatedSession(id!);
 
+// Build TOC entries
+const tocEntries = [...agendaGroups.entries()].map(([title, items], idx) => {
+  const first = items[0];
+  const number = first?.agenda_item_number;
+  const anchorId = `punt-${idx}`;
+  return { title, number, anchorId };
+});
+
 // Check if this session has annotations
 const hasAnnotations = sessionInterventions.some(
   (i) => i.annotated_text && i.annotated_text !== i.text,
@@ -119,18 +127,39 @@ const hasAnnotations = sessionInterventions.some(
     )
   }
 
+  <!-- Índex de punts -->
+  <section class="section toc-section">
+    <h2 class="section__title">📋 Ordre del dia</h2>
+    <nav class="toc" aria-label="Índex de punts">
+      <ol class="toc__list">
+        {
+          tocEntries.map((entry) => (
+            <li class="toc__item">
+              <a href={`#${entry.anchorId}`} class="toc__link">
+                {entry.number && (
+                  <span class="toc__number">{entry.number}</span>
+                )}
+                <span class="toc__title">{entry.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </section>
+
   <!-- Punts de l'ordre del dia -->
   <section class="section">
-    <h2 class="section__title">📋 Ordre del dia</h2>
     {
       (() => {
         let intIdx = 0;
-        return [...agendaGroups.entries()].map(([title, items]) => {
+        return [...agendaGroups.entries()].map(([title, items], agendaIdx) => {
           const first = items[0];
           const pol = first?.polarization;
           const hate = items.some((i) => i.hate_speech);
           const itemTags = first?.tags || [];
           const number = first?.agenda_item_number;
+          const anchorId = `punt-${agendaIdx}`;
 
           // Get agenda summary and party positions
           const agendaAnnotation = annotatedSession
@@ -138,7 +167,7 @@ const hasAnnotations = sessionInterventions.some(
             : undefined;
 
           return (
-            <div class="agenda-item" data-pagefind-body>
+            <div class="agenda-item" id={anchorId} data-pagefind-body>
               <div class="agenda-item__header">
                 <div>
                   {number && <span class="agenda-item__number">{number}</span>}
@@ -159,7 +188,10 @@ const hasAnnotations = sessionInterventions.some(
               {itemTags.length > 0 && (
                 <div class="agenda-item__meta">
                   {itemTags.map((t) => (
-                    <a href={`/temes/${t.code}/`} class="badge badge--tag">
+                    <a
+                      href={`${import.meta.env.BASE_URL}temes/${t.code}/`}
+                      class="badge badge--tag"
+                    >
                       {t.name}
                     </a>
                   ))}
@@ -168,9 +200,14 @@ const hasAnnotations = sessionInterventions.some(
 
               {/* Agenda summary */}
               {agendaAnnotation?.agenda_summary && (
-                <div class="agenda-summary">
-                  <div class="agenda-summary__title">📝 Resum del punt</div>
-                  <div class="agenda-summary__text">
+                <div class="agenda-summary-card">
+                  <div class="agenda-summary-card__header">
+                    <span class="agenda-summary-card__icon">📝</span>
+                    <span class="agenda-summary-card__label">
+                      Resum del punt
+                    </span>
+                  </div>
+                  <div class="agenda-summary-card__body">
                     {agendaAnnotation.agenda_summary}
                   </div>
                 </div>
@@ -179,21 +216,25 @@ const hasAnnotations = sessionInterventions.some(
               {/* Party positions */}
               {agendaAnnotation?.party_positions &&
                 Object.keys(agendaAnnotation.party_positions).length > 0 && (
-                  <details class="agenda-details">
-                    <summary>
-                      👥 Posicions dels partits (
-                      {Object.keys(agendaAnnotation.party_positions).length})
+                  <details class="party-positions-panel" open>
+                    <summary class="party-positions-panel__toggle">
+                      <span>
+                        👥 Posicions dels partits (
+                        {Object.keys(agendaAnnotation.party_positions).length})
+                      </span>
                     </summary>
-                    <div class="party-positions">
+                    <div class="party-positions-grid">
                       {Object.entries(agendaAnnotation.party_positions).map(
                         ([party, position]) => (
-                          <div class="party-position">
-                            <div class="party-position__name">
+                          <div
+                            class={`party-card party-card--${partyClass(party).replace("badge--", "")}`}
+                          >
+                            <div class="party-card__header">
                               <span class={`badge ${partyClass(party)}`}>
                                 {party}
                               </span>
                             </div>
-                            <div class="party-position__text">{position}</div>
+                            <div class="party-card__text">{position}</div>
                           </div>
                         ),
                       )}
@@ -246,7 +287,7 @@ const hasAnnotations = sessionInterventions.some(
                       <div>
                         <div class="intervention__header">
                           <a
-                            href={`/regidors/${slugify(i.speaker_name)}/`}
+                            href={`${import.meta.env.BASE_URL}regidors/${slugify(i.speaker_name)}/`}
                             class="intervention__name"
                           >
                             {i.speaker_name}

@@ -532,3 +532,198 @@ th {
   height: 100%;
   border: 0;
 }
+
+/* --- Table of Contents (session page) --- */
+.toc-section {
+  padding-bottom: var(--s-lg);
+}
+
+.toc {
+  background: var(--c-bg-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--s-lg);
+  box-shadow: var(--shadow);
+}
+
+.toc__list {
+  list-style: none;
+  counter-reset: toc-counter;
+  margin: 0;
+  padding: 0;
+}
+
+.toc__item {
+  counter-increment: toc-counter;
+  border-bottom: 1px solid var(--c-border-light);
+}
+
+.toc__item:last-child {
+  border-bottom: none;
+}
+
+.toc__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-sm);
+  padding: var(--s-sm) var(--s-md);
+  color: var(--c-text);
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.toc__link:hover {
+  background: var(--c-bg-alt);
+  border-left-color: var(--c-accent);
+  color: var(--c-accent);
+}
+
+.toc__number {
+  font-weight: 700;
+  color: var(--c-accent);
+  min-width: 2.5em;
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+}
+
+.toc__title {
+  flex: 1;
+}
+
+/* --- Agenda Summary Card --- */
+.agenda-summary-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius);
+  margin: var(--s-md) 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.agenda-summary-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-sm);
+  padding: var(--s-sm) var(--s-md);
+  background: rgba(34, 197, 94, 0.1);
+  border-bottom: 1px solid #bbf7d0;
+}
+
+.agenda-summary-card__icon {
+  font-size: var(--fs-lg);
+}
+
+.agenda-summary-card__label {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: #166534;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.agenda-summary-card__body {
+  padding: var(--s-md) var(--s-lg);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+/* --- Party Positions Panel --- */
+.party-positions-panel {
+  margin: var(--s-md) 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--c-bg-card);
+}
+
+.party-positions-panel__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--s-sm);
+  padding: var(--s-sm) var(--s-md);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  background: var(--c-bg-alt);
+  border: none;
+  width: 100%;
+  color: var(--c-text);
+  transition: background 0.15s;
+  list-style: none;
+}
+
+.party-positions-panel__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.party-positions-panel__toggle::before {
+  content: '▶';
+  font-size: 0.65em;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  color: var(--c-text-muted);
+}
+
+.party-positions-panel[open] > .party-positions-panel__toggle::before {
+  transform: rotate(90deg);
+}
+
+.party-positions-panel__toggle:hover {
+  background: var(--c-border-light);
+}
+
+.party-positions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--s-md);
+  padding: var(--s-md);
+}
+
+/* --- Party Card --- */
+.party-card {
+  background: var(--c-bg-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border-left: 4px solid var(--c-text-muted);
+  transition: box-shadow 0.15s ease;
+}
+
+.party-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.party-card--psc { border-left-color: var(--c-psc); }
+.party-card--junts { border-left-color: var(--c-junts); }
+.party-card--bcomu { border-left-color: var(--c-bcomu); }
+.party-card--erc { border-left-color: var(--c-erc); }
+.party-card--pp { border-left-color: var(--c-pp); }
+.party-card--vox { border-left-color: var(--c-vox); }
+.party-card--other { border-left-color: var(--c-text-muted); }
+
+.party-card__header {
+  padding: var(--s-sm) var(--s-md);
+  background: var(--c-bg-alt);
+  border-bottom: 1px solid var(--c-border-light);
+}
+
+.party-card__text {
+  padding: var(--s-sm) var(--s-md);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--c-text);
+}
+
+/* Smooth scroll offset for fixed header */
+.agenda-item[id] {
+  scroll-margin-top: calc(var(--header-height) + var(--s-lg));
+}
+
+@media (max-width: 768px) {
+  .party-positions-grid {
+    grid-template-columns: 1fr;
+  }
+}

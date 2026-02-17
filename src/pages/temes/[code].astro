@@ -133,7 +133,7 @@ const hateSpeechCount = tagInterventions.filter((i) => i.hate_speech).length;
               <div class="intervention-item__header">
                 <div style="display:flex; align-items:center; gap: var(--s-sm); flex-wrap: wrap;">
                   <a
-                    href={`/regidors/${slugify(i.speaker_name)}/`}
+                    href={`${import.meta.env.BASE_URL}regidors/${slugify(i.speaker_name)}/`}
                     class="intervention__name"
                     style="font-weight:600;"
                   >
@@ -150,7 +150,7 @@ const hateSpeechCount = tagInterventions.filter((i) => i.hate_speech).length;
                   {i.hate_speech && <span class="badge badge--hate">⚠️</span>}
                 </div>
                 <a
-                  href={`/sessions/${i.session_id}/#${getInterventionAnchor(i)}`}
+                  href={`${import.meta.env.BASE_URL}sessions/${i.session_id}/#${getInterventionAnchor(i)}`}
                   class="intervention-item__session"
                 >
                   📅 {i.session_date} — {i.agenda_item_title}

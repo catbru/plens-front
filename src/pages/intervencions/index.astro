@@ -106,6 +106,12 @@ const parties = [
           searching: "Cercant [SEARCH_TERM]...",
         },
         baseUrl: baseUrl,
+        processResult: function (result) {
+          if (result.url && !result.url.startsWith(baseUrl)) {
+            result.url = baseUrl + result.url.replace(/^\//, "");
+          }
+          return result;
+        },
       });
     };
     document.head.appendChild(script);

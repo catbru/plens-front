@@ -5,6 +5,7 @@
  */
 
 import annotatedData from '../data/intervencions_annotated.json';
+import interventionsRaw from '../data/intervencions.json';
 import plenarisData from '../data/plenaris.json';
 import regidorsData from '../data/regidors.json';
 import tagsData from '../data/tags.json';
@@ -84,21 +85,14 @@ for (const session of Object.values(annotatedSessions)) {
   }
 }
 
-// Build flat interventions list from the original intervencions.json embedded in annotations
-// We need to read the original data too for full intervention metadata
-import interventionsRaw from '../data/intervencions.json';
-
-// Merge: take full metadata from interventionsRaw, add annotated_text
+// Flatten interventions from original JSON and merge with annotations
 const allInterventions: Intervention[] = (interventionsRaw as any[]).map(i => ({
   ...i,
   annotated_text: annotatedTextMap.get(i.id) || undefined,
 }));
 
-// Filter to only sessions present in annotated data
 const annotatedSessionIds = new Set(Object.keys(annotatedSessions));
-const interventionsFiltered: Intervention[] = allInterventions.filter(
-  i => annotatedSessionIds.has(i.session_id)
-);
+const interventionsFiltered = allInterventions;
 
 // --- Data Access ---
 export const interventions: Intervention[] = interventionsFiltered;
