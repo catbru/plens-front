@@ -45,7 +45,6 @@ const avgPol =
   polValues.length > 0
     ? +(polValues.reduce((a, b) => a + b, 0) / polValues.length).toFixed(1)
     : 0;
-const hateSpeechCount = myInterventions.filter((i) => i.hate_speech).length;
 ---
 
 <BaseLayout title={regidor.name}>
@@ -119,10 +118,6 @@ const hateSpeechCount = myInterventions.filter((i) => i.hate_speech).length;
         <div class="stat__value">{avgPol > 0 ? avgPol : "—"}</div>
         <div class="stat__label">Polarització mitj.</div>
       </div>
-      <div class="stat">
-        <div class="stat__value">{hateSpeechCount}</div>
-        <div class="stat__label">Discurs d'odi</div>
-      </div>
     </div>
   </section>
 
@@ -185,7 +180,6 @@ const hateSpeechCount = myInterventions.filter((i) => i.hate_speech).length;
                       {polEmoji(i.polarization)}
                     </span>
                   )}
-                  {i.hate_speech && <span class="badge badge--hate">⚠️</span>}
                 </div>
               </div>
               <p class="intervention__text">{i.text}</p>

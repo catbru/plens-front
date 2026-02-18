@@ -277,10 +277,7 @@ h3 {
   color: #991B1B;
 }
 
-.badge--hate {
-  background: #991B1B;
-  color: #fff;
-}
+
 
 /* --- Section --- */
 .section {
@@ -749,7 +746,7 @@ th {
   color: var(--c-text-muted);
 }
 
-.party-positions-panel[open] > .party-positions-panel__toggle::before {
+.party-positions-panel[open]>.party-positions-panel__toggle::before {
   transform: rotate(90deg);
 }
 
@@ -778,13 +775,33 @@ th {
   box-shadow: var(--shadow-md);
 }
 
-.party-card--psc { border-left-color: var(--c-psc); }
-.party-card--junts { border-left-color: var(--c-junts); }
-.party-card--bcomu { border-left-color: var(--c-bcomu); }
-.party-card--erc { border-left-color: var(--c-erc); }
-.party-card--pp { border-left-color: var(--c-pp); }
-.party-card--vox { border-left-color: var(--c-vox); }
-.party-card--other { border-left-color: var(--c-text-muted); }
+.party-card--psc {
+  border-left-color: var(--c-psc);
+}
+
+.party-card--junts {
+  border-left-color: var(--c-junts);
+}
+
+.party-card--bcomu {
+  border-left-color: var(--c-bcomu);
+}
+
+.party-card--erc {
+  border-left-color: var(--c-erc);
+}
+
+.party-card--pp {
+  border-left-color: var(--c-pp);
+}
+
+.party-card--vox {
+  border-left-color: var(--c-vox);
+}
+
+.party-card--other {
+  border-left-color: var(--c-text-muted);
+}
 
 .party-card__header {
   padding: var(--s-sm) var(--s-md);
@@ -816,6 +833,7 @@ th {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

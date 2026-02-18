@@ -48,8 +48,9 @@ const polDist = [1, 2, 3, 4].map((level) => ({
         i polarització.
       </p>
       <div class="hero__actions">
-        <a href={`${import.meta.env.BASE_URL}sessions/`} class="btn btn--primary"
-          >Explorar sessions</a
+        <a
+          href={`${import.meta.env.BASE_URL}sessions/`}
+          class="btn btn--primary">Explorar sessions</a
         >
         <a href={`${import.meta.env.BASE_URL}about/`} class="btn btn--ghost"
           >Com funciona →</a
@@ -85,10 +86,7 @@ const polDist = [1, 2, 3, 4].map((level) => ({
   <section class="section">
     <div class="section__header">
       <h2 class="section__title">Últimes sessions</h2>
-      <a
-        href={`${import.meta.env.BASE_URL}sessions/`}
-        class="section__link"
-      >
+      <a href={`${import.meta.env.BASE_URL}sessions/`} class="section__link">
         Veure-les totes →
       </a>
     </div>
@@ -111,9 +109,6 @@ const polDist = [1, 2, 3, 4].map((level) => ({
                   {polEmoji(s.avgPolarization)} {polLabel(s.avgPolarization)}
                 </span>
               )}
-              {s.hasHateSpeech && (
-                <span class="badge badge--hate">⚠️ Discurs d'odi</span>
-              )}
             </div>
           </a>
         ))
@@ -125,17 +120,14 @@ const polDist = [1, 2, 3, 4].map((level) => ({
   <section class="section">
     <div class="section__header">
       <h2 class="section__title">Polarització al ple</h2>
-      <a
-        href={`${import.meta.env.BASE_URL}retorica/`}
-        class="section__link"
-      >
+      <a href={`${import.meta.env.BASE_URL}retorica/`} class="section__link">
         Anàlisi retòrica →
       </a>
     </div>
     <p class="section__description">
-      Cada intervenció rep una puntuació de l'1 al 4, des del consens total
-      fins al debat molt intens. L'escala mesura el grau de conflicte o
-      acord en el discurs.
+      Cada intervenció rep una puntuació de l'1 al 4, des del consens total fins
+      al debat molt intens. L'escala mesura el grau de conflicte o acord en el
+      discurs.
     </p>
     <div class="pol-bars">
       {
@@ -329,10 +321,18 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     height: 100%;
     border-radius: 99px;
   }
-  .pol-bar__fill--1 { background: var(--c-pol-1); }
-  .pol-bar__fill--2 { background: var(--c-pol-2); }
-  .pol-bar__fill--3 { background: var(--c-pol-3); }
-  .pol-bar__fill--4 { background: var(--c-pol-4); }
+  .pol-bar__fill--1 {
+    background: var(--c-pol-1);
+  }
+  .pol-bar__fill--2 {
+    background: var(--c-pol-2);
+  }
+  .pol-bar__fill--3 {
+    background: var(--c-pol-3);
+  }
+  .pol-bar__fill--4 {
+    background: var(--c-pol-4);
+  }
   .pol-bar__value {
     font-size: var(--fs-xs);
     color: var(--c-text-muted);
