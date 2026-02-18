@@ -4,7 +4,6 @@ import {
   interventions,
   getSessionsWithStats,
   getRegidorsWithStats,
-  getTagsWithStats,
   polEmoji,
   polClass,
   polLabel,
@@ -13,7 +12,6 @@ import {
 
 const sessionsStats = getSessionsWithStats();
 const regidorsStats = getRegidorsWithStats();
-const tagsStats = getTagsWithStats();
 
 const totalInterventions = interventions.length;
 const totalSessions = sessionsStats.length;
@@ -24,8 +22,8 @@ const parties = [
   ...new Set(interventions.map((i) => i.speaker_party).filter(Boolean)),
 ];
 
-// Últimes 5 sessions
-const latestSessions = sessionsStats.slice(0, 5);
+// Últimes 4 sessions (grid-2 simètric)
+const latestSessions = sessionsStats.slice(0, 4);
 
 // Polarització global
 const polDist = [1, 2, 3, 4].map((level) => ({
@@ -39,62 +37,61 @@ const polDist = [1, 2, 3, 4].map((level) => ({
 <BaseLayout title="Inici">
   <!-- Hero -->
   <section class="hero">
-    <h1 class="hero__title">plens.barcelona</h1>
-    <p class="hero__subtitle">
-      Explorador dels plens del Consell Municipal de Barcelona. Totes les
-      intervencions, regidors i temàtiques a un clic.
-    </p>
-  </section>
-
-  <!-- Stats -->
-  <section class="section">
-    <div class="stats">
-      <div class="stat">
-        <div class="stat__value">
-          {totalInterventions.toLocaleString("ca-ES")}
-        </div>
-        <div class="stat__label">Intervencions</div>
-      </div>
-      <div class="stat">
-        <div class="stat__value">{totalSessions}</div>
-        <div class="stat__label">Sessions</div>
-      </div>
-      <div class="stat">
-        <div class="stat__value">{totalRegidors}</div>
-        <div class="stat__label">Regidors actius</div>
-      </div>
-      <div class="stat">
-        <div class="stat__value">{parties.length}</div>
-        <div class="stat__label">Partits</div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Consell Municipal de Barcelona</p>
+      <h1 class="hero__title">
+        Les paraules dels regidors,<br class="hero__br" /> analitzades i en obert.
+      </h1>
+      <p class="hero__subtitle">
+        Cada intervenció, cada debat i cada posició política dels plens
+        municipals: transcrita, indexada i analitzada amb indicadors de retòrica
+        i polarització.
+      </p>
+      <div class="hero__actions">
+        <a href={`${import.meta.env.BASE_URL}sessions/`} class="btn btn--primary"
+          >Explorar sessions</a
+        >
+        <a href={`${import.meta.env.BASE_URL}about/`} class="btn btn--ghost"
+          >Com funciona →</a
+        >
       </div>
     </div>
-  </section>
-
-  <!-- Accés ràpid -->
-  <section class="section">
-    <div class="grid grid-4 quick-links">
-      <a href={`${import.meta.env.BASE_URL}sessions/`} class="card quick-link">
-        <span class="quick-link__icon">📅</span>
-        <span class="quick-link__text">Sessions plenàries</span>
-      </a>
-      <a href={`${import.meta.env.BASE_URL}regidors/`} class="card quick-link">
-        <span class="quick-link__icon">👤</span>
-        <span class="quick-link__text">Regidors</span>
-      </a>
-      <a href={`${import.meta.env.BASE_URL}temes/`} class="card quick-link">
-        <span class="quick-link__icon">🏷️</span>
-        <span class="quick-link__text">Temes</span>
-      </a>
-      <a href={`${import.meta.env.BASE_URL}retorica/`} class="card quick-link">
-        <span class="quick-link__icon">🎭</span>
-        <span class="quick-link__text">Retòrica</span>
-      </a>
+    <div class="hero__proof">
+      <div class="hero__proof-item">
+        <strong class="hero__proof-value"
+          >{totalInterventions.toLocaleString("ca-ES")}</strong
+        >
+        <span class="hero__proof-label">intervencions</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <strong class="hero__proof-value">{totalSessions}</strong>
+        <span class="hero__proof-label">sessions analitzades</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <strong class="hero__proof-value">{totalRegidors}</strong>
+        <span class="hero__proof-label">regidors indexats</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <strong class="hero__proof-value">{parties.length}</strong>
+        <span class="hero__proof-label">partits representats</span>
+      </div>
     </div>
   </section>
 
   <!-- Últimes sessions -->
   <section class="section">
-    <h2 class="section__title">📅 Últimes sessions</h2>
+    <div class="section__header">
+      <h2 class="section__title">Últimes sessions</h2>
+      <a
+        href={`${import.meta.env.BASE_URL}sessions/`}
+        class="section__link"
+      >
+        Veure-les totes →
+      </a>
+    </div>
     <div class="grid grid-2">
       {
         latestSessions.map((s) => (
@@ -126,7 +123,20 @@ const polDist = [1, 2, 3, 4].map((level) => ({
 
   <!-- Polarització -->
   <section class="section">
-    <h2 class="section__title">📊 Polarització global</h2>
+    <div class="section__header">
+      <h2 class="section__title">Polarització al ple</h2>
+      <a
+        href={`${import.meta.env.BASE_URL}retorica/`}
+        class="section__link"
+      >
+        Anàlisi retòrica →
+      </a>
+    </div>
+    <p class="section__description">
+      Cada intervenció rep una puntuació de l'1 al 4, des del consens total
+      fins al debat molt intens. L'escala mesura el grau de conflicte o
+      acord en el discurs.
+    </p>
     <div class="pol-bars">
       {
         polDist.map((p) => {
@@ -146,7 +156,7 @@ const polDist = [1, 2, 3, 4].map((level) => ({
                 />
               </div>
               <div class="pol-bar__value">
-                {p.count} ({pct}%)
+                {p.count.toLocaleString("ca-ES")} ({pct}%)
               </div>
             </div>
           );
@@ -157,7 +167,12 @@ const polDist = [1, 2, 3, 4].map((level) => ({
 
   <!-- Top regidors -->
   <section class="section">
-    <h2 class="section__title">🎤 Regidors més actius</h2>
+    <div class="section__header">
+      <h2 class="section__title">Regidors més actius</h2>
+      <a href={`${import.meta.env.BASE_URL}regidors/`} class="section__link">
+        Veure tots →
+      </a>
+    </div>
     <div class="grid grid-4">
       {
         regidorsStats.slice(0, 8).map((r) => (
@@ -180,57 +195,106 @@ const polDist = [1, 2, 3, 4].map((level) => ({
         ))
       }
     </div>
-    <p style="text-align:center; margin-top: var(--s-lg);">
-      <a href={`${import.meta.env.BASE_URL}regidors/`}
-        >Veure tots els regidors →</a
-      >
-    </p>
   </section>
 </BaseLayout>
 
 <style>
+  /* Hero */
   .hero {
-    text-align: center;
-    padding: var(--s-3xl) 0 var(--s-xl);
+    padding: var(--s-3xl) 0 var(--s-2xl);
+    border-bottom: 1px solid var(--c-border-light);
+    margin-bottom: 0;
   }
+
+  .hero__content {
+    max-width: 720px;
+    margin-bottom: var(--s-2xl);
+  }
+
+  .hero__eyebrow {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-md);
+  }
+
   .hero__title {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.25rem);
     font-weight: 700;
-    background: linear-gradient(135deg, var(--c-accent), #b00020);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.15;
+    color: var(--c-text);
+    margin-bottom: var(--s-lg);
+    letter-spacing: -0.02em;
   }
+
   .hero__subtitle {
     font-size: var(--fs-lg);
     color: var(--c-text-muted);
+    line-height: 1.65;
     max-width: 600px;
-    margin: var(--s-md) auto 0;
+    margin-bottom: var(--s-xl);
   }
 
-  .quick-link {
+  .hero__actions {
+    display: flex;
+    gap: var(--s-sm);
+    flex-wrap: wrap;
+  }
+
+  /* Stats proof row */
+  .hero__proof {
+    display: flex;
+    align-items: center;
+    gap: var(--s-xl);
+    flex-wrap: wrap;
+    padding: var(--s-lg) var(--s-xl);
+    background: var(--c-bg-alt);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--c-border);
+  }
+
+  .hero__proof-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--s-sm);
-    text-align: center;
-    padding: var(--s-xl);
-  }
-  .quick-link__icon {
-    font-size: 2rem;
-  }
-  .quick-link__text {
-    font-weight: 600;
+    gap: 2px;
   }
 
-  .session-card__date {
-    font-size: var(--fs-sm);
+  .hero__proof-value {
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    color: var(--c-text);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__proof-label {
+    font-size: var(--fs-xs);
     color: var(--c-text-muted);
+    font-weight: 500;
+  }
+
+  .hero__proof-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: var(--c-border);
+    flex-shrink: 0;
+  }
+
+  /* Session cards */
+  .session-card__date {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--c-accent);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     margin-bottom: var(--s-xs);
   }
   .session-card__title {
     font-weight: 600;
     margin-bottom: var(--s-sm);
+    line-height: 1.4;
   }
   .session-card__meta {
     display: flex;
@@ -238,15 +302,16 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     flex-wrap: wrap;
   }
 
+  /* Polarization chart */
   .pol-bars {
     display: flex;
     flex-direction: column;
     gap: var(--s-md);
-    max-width: 600px;
+    max-width: 640px;
   }
   .pol-bar {
     display: grid;
-    grid-template-columns: 180px 1fr 100px;
+    grid-template-columns: 180px 1fr 110px;
     align-items: center;
     gap: var(--s-md);
   }
@@ -255,7 +320,7 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     font-weight: 500;
   }
   .pol-bar__track {
-    height: 24px;
+    height: 20px;
     background: var(--c-bg-alt);
     border-radius: 99px;
     overflow: hidden;
@@ -263,26 +328,19 @@ const polDist = [1, 2, 3, 4].map((level) => ({
   .pol-bar__fill {
     height: 100%;
     border-radius: 99px;
-    transition: width 1s ease;
   }
-  .pol-bar__fill--1 {
-    background: var(--c-pol-1);
-  }
-  .pol-bar__fill--2 {
-    background: var(--c-pol-2);
-  }
-  .pol-bar__fill--3 {
-    background: var(--c-pol-3);
-  }
-  .pol-bar__fill--4 {
-    background: var(--c-pol-4);
-  }
+  .pol-bar__fill--1 { background: var(--c-pol-1); }
+  .pol-bar__fill--2 { background: var(--c-pol-2); }
+  .pol-bar__fill--3 { background: var(--c-pol-3); }
+  .pol-bar__fill--4 { background: var(--c-pol-4); }
   .pol-bar__value {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     color: var(--c-text-muted);
     text-align: right;
+    font-variant-numeric: tabular-nums;
   }
 
+  /* Regidor mini cards */
   .regidor-mini {
     text-align: center;
     display: flex;
@@ -295,23 +353,43 @@ const polDist = [1, 2, 3, 4].map((level) => ({
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--c-border);
+    margin-bottom: 2px;
   }
   .regidor-mini__name {
     font-weight: 600;
     font-size: var(--fs-sm);
+    line-height: 1.3;
   }
   .regidor-mini__count {
     font-size: var(--fs-xs);
     color: var(--c-text-muted);
   }
 
+  /* Responsive */
   @media (max-width: 768px) {
-    .hero__title {
-      font-size: 2.5rem;
+    .hero {
+      padding: var(--s-2xl) 0 var(--s-xl);
+    }
+    .hero__br {
+      display: none;
+    }
+    .hero__proof {
+      gap: var(--s-lg);
+      padding: var(--s-md) var(--s-lg);
+    }
+    .hero__proof-divider {
+      display: none;
+    }
+    .hero__proof-item {
+      min-width: calc(50% - var(--s-lg));
     }
     .pol-bar {
       grid-template-columns: 1fr;
       gap: var(--s-xs);
+    }
+    .pol-bar__value {
+      text-align: left;
     }
   }
 </style>
